@@ -1,15 +1,15 @@
-# Quadrant Website        
+# Quadrant Website                  
 
 Quadrant Real Estate website + admin panel, built with **Laravel 10 (PHP 8.1+) and MySQL**.
-
+                
 > Note: the site is served from the **project root** (not `public/`) — asset URLs look like `/public/assets/...`.
 > That's why local dev uses `server.php` instead of `php artisan serve`.             
 
 ---
 
 ## 1. Run it locally (Windows)
-
-### What you need         
+                    
+### What you need               
 | Tool | Easiest way to get it |
 |------|-----------------------|
 | PHP 8.1+ **and** MySQL | Install **[Laragon](https://laragon.org/download/)** or **[XAMPP](https://www.apachefriends.org/)** (both include PHP + MySQL) |
