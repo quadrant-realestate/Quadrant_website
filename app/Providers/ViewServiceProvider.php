@@ -3,18 +3,12 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\DB;
 
 class ViewServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        View::composer('*', function ($view) {
-
-            $categories = DB::table('users')->get();
-
-            $view->with('users', $categories);
-        });
+        // Previously loaded the whole `users` table into every view (unused).
+        // That ran a DB query on every page — including error pages — so it was removed.
     }
 }
