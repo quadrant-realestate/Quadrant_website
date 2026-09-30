@@ -9,7 +9,7 @@ Quadrant Real Estate website + admin panel, built with **Laravel 10 (PHP 8.1+) a
 
 ## 1. Run it locally (Windows)
 
-### What you need
+### What you need         
 | Tool | Easiest way to get it |
 |------|-----------------------|
 | PHP 8.1+ **and** MySQL | Install **[Laragon](https://laragon.org/download/)** or **[XAMPP](https://www.apachefriends.org/)** (both include PHP + MySQL) |
