@@ -26,6 +26,18 @@ You need a copy of the live database:
 3. Create an empty database called `quadrant` and **Import** the `.sql` file into it
    (phpMyAdmin at http://localhost/phpmyadmin, or `mysql -u root quadrant < dump.sql`).
 
+**No access to the live database?** Load the empty structure instead — the site then runs with no listings,
+and you can add content through the admin panel:
+```bash
+mysql -u root quadrant < database/local-dev-schema.sql
+php artisan migrate
+```
+Then create an admin login (password is stored as SHA1):
+```sql
+INSERT INTO admins (name, email, password) VALUES ('Admin', 'admin@quadrant.local', SHA1('admin12345'));
+```
+Admin panel: http://localhost:8000/admin/sign-in
+
 ### First-time setup
 Run these in the project folder:
 
@@ -41,7 +53,10 @@ Open `.env` and check the `DB_*` lines match your local MySQL (default: user `ro
 ```bash
 php -S localhost:8000 server.php
 ```
-Open **http://localhost:8000** 🎉
+Open **http://localhost:8000** 🎉 (or just double-click `start-local.bat`)
+
+> The PHP dev server handles one request at a time, so while the homepage's big background video
+> is loading, other clicks can feel slow. That's normal locally — it's fine on real hosting.
 
 ---
 
