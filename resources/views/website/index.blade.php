@@ -183,6 +183,7 @@
         muted
         playsinline
         preload="auto"
+        poster="{{ URL::to('') }}/public/assets/images/quadrant-hero-dubai.jpg"
         style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;">
         <source src="{{ URL::to('') }}/public/assets/video/home-video-3.mp4" type="video/mp4">
         {{-- Fallback image if browser doesn't support video --}}

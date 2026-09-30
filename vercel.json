@@ -10,9 +10,31 @@
     }
   },
   "routes": [
-    { "src": "/public/(.*)", "dest": "/$1" },
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/api/index.php" }
+    {
+      "src": "/public/(.*\\.(?:jpg|jpeg|png|webp|avif|gif|svg|ico|jfif|mp4|webm|woff2?|ttf|otf|eot|pdf))",
+      "dest": "/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=2592000, stale-while-revalidate=86400"
+      }
+    },
+    {
+      "src": "/public/(.*\\.(?:css|js|map))",
+      "dest": "/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=86400, stale-while-revalidate=604800"
+      }
+    },
+    {
+      "src": "/public/(.*)",
+      "dest": "/$1"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.php"
+    }
   ],
   "env": {
     "APP_ENV": "production",
