@@ -25,14 +25,22 @@
     <meta property="og:url"         content="{{ request()->url() }}">
     <meta property="og:title"       content="@yield('title', setting('site_name'))">
     <meta property="og:description" content="@yield('meta_description', '')">
-    <meta property="og:image"       content="@yield('og_image', URL::to('') . '/public/' . setting('site_logo'))">
+    @php
+        // Share preview image: page-specific if set, otherwise the homepage hero (1200x630). Spaces encoded for WhatsApp.
+        $ogImage = str_replace(' ', '%20', trim($__env->yieldContent('og_image')) ?: URL::to('') . '/public/assets/images/og-image.jpg');
+    @endphp
+    <meta property="og:image"       content="{{ $ogImage }}">
+    @if(str_ends_with($ogImage, 'og-image.jpg'))
+    <meta property="og:image:width"  content="1200">
+    <meta property="og:image:height" content="630">
+    @endif
     <meta property="og:site_name"   content="{{ setting('site_name', 'Quadrant Properties') }}">
 
     {{-- Twitter Card --}}
     <meta name="twitter:card"        content="summary_large_image">
     <meta name="twitter:title"       content="@yield('title', setting('site_name'))">
     <meta name="twitter:description" content="@yield('meta_description', '')">
-    <meta name="twitter:image"       content="@yield('og_image', URL::to('') . '/public/' . setting('site_logo'))">
+    <meta name="twitter:image"       content="{{ $ogImage }}">
 
     {{-- Canonical --}}
     <link rel="canonical" href="{{ request()->url() }}">
