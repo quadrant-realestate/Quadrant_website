@@ -120,13 +120,16 @@ class DevelopmentFrontController extends Controller
                          ->orderBy('developer_name')
                          ->pluck('developer_name');
 
+        // Years computed in PHP so this works on both MySQL and SQLite
         $handoverYears = DB::table('developments')
                             ->where('is_active', 1)
                             ->whereNotNull('handover_date')
-                            ->selectRaw('YEAR(handover_date) as yr')
-                            ->distinct()
-                            ->orderBy('yr')
-                            ->pluck('yr');
+                            ->pluck('handover_date')
+                            ->map(fn ($d) => (int) substr($d, 0, 4))
+                            ->filter()
+                            ->unique()
+                            ->sort()
+                            ->values();
 
         return view('website.developments.index', compact(
             'developments',
