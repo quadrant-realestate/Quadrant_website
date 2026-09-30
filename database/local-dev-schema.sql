@@ -1,6 +1,4 @@
--- Local-dev schema rebuilt from the code (structure only, no data).
--- The real schema + data live in the live cPanel database; import that dump instead when you have it.
--- Load: mariadb -u root quadrant < database/local-dev-schema.sql
+-- Database structure (rebuilt from the code). Load this first, then quadrant-content.sql.
 /*M!999999\- enable the sandbox mode */ 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -80,7 +78,7 @@ CREATE TABLE `blog_posts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `branded_residences`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -138,7 +136,7 @@ CREATE TABLE `communities` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `contacts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -222,7 +220,7 @@ CREATE TABLE `development_images` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=159 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `developments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -230,7 +228,7 @@ DROP TABLE IF EXISTS `developments`;
 CREATE TABLE `developments` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `banner_image` varchar(255) DEFAULT NULL,
-  `bedroom_range` varchar(255) DEFAULT NULL,
+  `bedroom_range` text DEFAULT NULL,
   `brochure_pdf` varchar(255) DEFAULT NULL,
   `community_id` bigint(20) unsigned DEFAULT NULL,
   `completion_pct` decimal(16,4) DEFAULT NULL,
@@ -246,13 +244,13 @@ CREATE TABLE `developments` (
   `main_image` varchar(255) DEFAULT NULL,
   `meta_desc` longtext DEFAULT NULL,
   `meta_title` longtext DEFAULT NULL,
-  `nearby_landmarks` varchar(255) DEFAULT NULL,
+  `nearby_landmarks` longtext DEFAULT NULL,
   `og_image` varchar(255) DEFAULT NULL,
   `payment_plan` longtext DEFAULT NULL,
   `price_currency` varchar(255) DEFAULT NULL,
   `price_from` decimal(16,4) DEFAULT NULL,
-  `property_types` varchar(255) DEFAULT NULL,
-  `quadrant_view` varchar(255) DEFAULT NULL,
+  `property_types` text DEFAULT NULL,
+  `quadrant_view` longtext DEFAULT NULL,
   `rera_permit` varchar(255) DEFAULT NULL,
   `rera_qr_image` varchar(255) DEFAULT NULL,
   `short_description` longtext DEFAULT NULL,
@@ -263,12 +261,13 @@ CREATE TABLE `developments` (
   `status` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `total_units` int(11) DEFAULT 0,
-  `video_url` varchar(255) DEFAULT NULL,
+  `video_url` text DEFAULT NULL,
   `yr` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `community_slug` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `expressioninterests`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -547,7 +546,7 @@ DROP TABLE IF EXISTS `properties`;
 /*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `properties` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `address` longtext DEFAULT NULL,
+  `address` text DEFAULT NULL,
   `area_sqft` decimal(16,4) DEFAULT NULL,
   `bathrooms` int(11) DEFAULT 0,
   `bedrooms` int(11) DEFAULT 0,
@@ -662,8 +661,10 @@ CREATE TABLE `settings` (
   `value` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `label` varchar(255) DEFAULT NULL,
+  `type` varchar(50) DEFAULT 'text',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `shared_carts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
