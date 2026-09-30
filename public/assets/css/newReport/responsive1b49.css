@@ -1,0 +1,162 @@
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+ .logo-web img {
+  max-width: 200px;
+ }
+ .navbar {
+  padding: 15px 0;
+ }
+ .key-trends .image-box {
+  padding-right: 0;
+ }
+ .media-mentions .inner {
+  padding: 40px;
+ }
+
+ h3 {
+  margin-bottom: 20px;
+ }
+ h3 br {
+  display: none;
+ }
+ .key-highlight .key-card {
+  padding: 20px;
+ }
+ .inside-report ul li .text-box {
+  max-width: 220px;
+ }
+ .explore-key {
+  padding-top: 20px;
+ }
+ .want-explore .inner {
+  padding: 40px;
+ }
+ .report-form {
+  padding: 20px;
+ }
+}
+
+@media only screen and (max-width: 767px) {
+.container {
+    max-width: 100%;
+}
+.logo-web img{max-width: 180px;}
+.navbar {padding: 10px 0px;}
+.right-head button {
+	width: 35px;
+	height: 35px;
+}
+.right-head button img{max-width:15px;}
+
+ .main-banner .image-box {
+  margin-bottom: 40px;
+  justify-content: flex-start;
+ }
+ .main-banner {
+  padding-bottom: 40px;
+ }
+ .key-trends .inner {
+  padding: 40px 0;
+ }
+ .key-trends .image-box {
+  width: 100%;
+  padding-right: 0;
+  margin-bottom: 30px;
+ }
+ h3 {
+  margin-bottom: 20px;
+ }
+.media-mentions .inner ul {
+    display: flex;
+    justify-content: center;
+    gap:20px;
+    flex-wrap: wrap;
+}
+ .media-mentions .inner {
+  padding: 40px 30px;
+ }
+
+ .key-highlight,
+ .analyst-note,
+ .media-mentions,
+ .inside-report,
+ .explore-key {
+  padding: 40px 0;
+ }
+ h3 br,  h1 br {
+  display: none;
+ }
+ .bannerContent h1{font-size: 30px;}
+ h3{font-size: 25px;}
+ .key-highlight .key-card {
+  min-height: inherit;
+ }
+ .key-highlight .key-card p {
+  margin: 0;
+ }
+ .key-highlight .key-card span {
+  margin-bottom: 10px;
+ }
+ .media-mentions {
+  margin-top: 0;
+  margin-bottom: 40px;
+ }
+ .analyst-note .inner {
+  padding-bottom: 40px;
+ }
+ .inside-report {
+  padding-top: 20px;
+ }
+ .inside-report ul li {
+  width: 50%;
+ }
+ .inside-report ul li .text-box {
+  max-width: 230px;
+ }
+ .explore-key ul li {
+  width: 50%;
+ }
+ .explore-key ul li .text-box {
+  padding: 10px 10px 10px 0;
+ }
+ .want-explore .inner {
+  padding: 40px 30px;
+ }
+ .want-explore h3 {
+  margin: 0 0 15px 0;
+ }
+ .report-form {
+	background: #dfecf0;
+	padding: 25px 15px;
+	border-radius: 12px;
+	max-width:90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.want-explore span{font-size: 18px; line-height: 24px;}
+footer .social-links {
+    justify-content: center; margin-bottom: 15px;
+}
+footer p {
+    text-align: center;
+}
+
+}
+
+
+@media only screen and (max-width:479px) {
+.inside-report ul li, .explore-key ul li {
+	width: 100%;
+}
+.inside-report ul li {
+    border-bottom: none;
+}
+section.media-mentions {
+    margin-top: 2rem;
+}
+.media-mentions .inner {
+	padding: 20px 20px;
+	border-radius: 20px;
+}
+.media-mentions .inner ul{gap: 10px}
+.media-mentions{padding: 0;}
+}
