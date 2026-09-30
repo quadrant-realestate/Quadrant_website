@@ -1,4 +1,8 @@
 {
+  "framework": null,
+  "installCommand": "echo skip",
+  "buildCommand": "echo skip",
+  "outputDirectory": "public",
   "functions": {
     "api/index.php": {
       "runtime": "vercel-php@0.7.4",
@@ -6,6 +10,7 @@
     }
   },
   "routes": [
+    { "src": "/public/(.*)", "dest": "/$1" },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/api/index.php" }
   ],
