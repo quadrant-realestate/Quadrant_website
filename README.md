@@ -1,4 +1,4 @@
-# Quadrant Website        
+# Quadrant Website                  
 
 Quadrant Real Estate website + admin panel, built with **Laravel 10 (PHP 8.1+) and MySQL**.
 
