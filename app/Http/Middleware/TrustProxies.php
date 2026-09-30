@@ -12,7 +12,7 @@ class TrustProxies extends Middleware
      *
      * @var array<int, string>|string|null
      */
-    protected $proxies;
+    protected $proxies = '*'; // Vercel's edge proxy — needed so https:// URLs are generated
 
     /**
      * The headers that should be used to detect proxies.
