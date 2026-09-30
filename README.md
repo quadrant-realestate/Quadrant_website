@@ -3,7 +3,7 @@
 Quadrant Real Estate website + admin panel, built with **Laravel 10 (PHP 8.1+) and MySQL**.
 
 > Note: the site is served from the **project root** (not `public/`) — asset URLs look like `/public/assets/...`.
-> That's why local dev uses `server.php` instead of `php artisan serve`.
+> That's why local dev uses `server.php` instead of `php artisan serve`.             
 
 ---
 
