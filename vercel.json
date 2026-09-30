@@ -1,0 +1,25 @@
+{
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.7.3",
+      "excludeFiles": "{public/**,node_modules/**,.git/**,tests/**,storage/logs/**}"
+    }
+  },
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/api/index.php" }
+  ],
+  "env": {
+    "APP_ENV": "production",
+    "APP_DEBUG": "false",
+    "APP_CONFIG_CACHE": "/tmp/laravel/config.php",
+    "APP_EVENTS_CACHE": "/tmp/laravel/events.php",
+    "APP_PACKAGES_CACHE": "/tmp/laravel/packages.php",
+    "APP_ROUTES_CACHE": "/tmp/laravel/routes.php",
+    "APP_SERVICES_CACHE": "/tmp/laravel/services.php",
+    "VIEW_COMPILED_PATH": "/tmp/laravel/views",
+    "CACHE_DRIVER": "array",
+    "LOG_CHANNEL": "stderr",
+    "SESSION_DRIVER": "cookie"
+  }
+}
