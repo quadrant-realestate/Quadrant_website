@@ -5,3 +5,4 @@ vendor
 error_log
 storage/logs/*
 tests
+studio

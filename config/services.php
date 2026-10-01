@@ -31,4 +31,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    // Blog content lives in Sanity (editor: /studio in this repo).
+    // The project ID and dataset are public, so the defaults can live here.
+    'sanity' => [
+        'project_id'  => env('SANITY_PROJECT_ID', 'e7qiny9k'),
+        'dataset'     => env('SANITY_DATASET', 'production'),
+        'api_version' => env('SANITY_API_VERSION', '2025-02-19'),
+        'use_cdn'     => env('SANITY_USE_CDN', true),
+    ],
+
 ];

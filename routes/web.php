@@ -22,7 +22,7 @@ use App\Http\Controllers\BrandedResidenceFrontController;
 use App\Http\Controllers\CommunityFrontController;
 
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\InsightController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogPostController;
 
 use App\Http\Controllers\DevelopmentFloorPlanController;
@@ -95,9 +95,13 @@ Route::get('/privacy-policy',  [PageController::class, 'privacy'])->name('privac
 Route::get('/terms',           [PageController::class, 'terms'])->name('terms');
 Route::get('/cookie-policy',   [PageController::class, 'cookies'])->name('cookies');
 
-// Insights / Journal
-Route::get('/insights',        [InsightController::class, 'index'])->name('insights.index');
-Route::get('/insights/{slug}', [InsightController::class, 'show'])->name('insights.show');
+// Blogs (content managed in Sanity — see /studio)
+Route::get('/blogs',        [BlogController::class, 'index'])->name('blogs.index');
+Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');
+
+// Old Insights URLs now live under /blogs
+Route::permanentRedirect('/insights', '/blogs');
+Route::get('/insights/{slug}', fn ($slug) => redirect()->route('blogs.show', $slug, 301));
 
 ///////////////////////////////////////////////////////////
 //                      Admin Routes                     //

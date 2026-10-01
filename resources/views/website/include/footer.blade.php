@@ -32,7 +32,7 @@
                     <li style="margin-bottom:10px;"><a href="{{ route('services') }}" style="color:#8a9ab5; font-size:13px; text-decoration:none;">Services</a></li>
                     <li style="margin-bottom:10px;"><a href="{{ route('about') }}" style="color:#8a9ab5; font-size:13px; text-decoration:none;">About</a></li>
                     <!-- <li style="margin-bottom:10px;"><a href="{{ route('giving') }}" style="color:#8a9ab5; font-size:13px; text-decoration:none;">Giving</a></li> -->
-                    <!-- <li style="margin-bottom:10px;"><a href="{{ route('insights.index') }}" style="color:#8a9ab5; font-size:13px; text-decoration:none;">Insights</a></li> -->
+                    <li style="margin-bottom:10px;"><a href="{{ route('blogs.index') }}" style="color:#8a9ab5; font-size:13px; text-decoration:none;">Blogs</a></li>
                     <li style="margin-bottom:10px;"><a href="{{ route('contact') }}" style="color:#8a9ab5; font-size:13px; text-decoration:none;">Contact</a></li>
                 </ul>
             </div>

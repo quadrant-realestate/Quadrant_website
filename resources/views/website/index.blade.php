@@ -412,7 +412,7 @@
         <div class="qp-container">
             <div class="qp-listings-head">
                 <h2>Insights</h2>
-                <a href="{{ route('insights.index') }}">Read our Insights →</a>
+                <a href="{{ route('blogs.index') }}">Read our Blogs →</a>
             </div>
 
             <div class="qp-listings-grid" style="grid-template-columns: repeat(3, 1fr);">

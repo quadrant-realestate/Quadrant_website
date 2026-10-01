@@ -109,10 +109,10 @@
                             <a class="nav-link {{ request()->routeIs('giving') ? 'active' : '' }}"
                                href="{{ route('giving') }}">Giving</a>
                         </li> -->
-                        <!-- <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('insights.*') ? 'active' : '' }}"
-                               href="{{ route('insights.index') }}">Insights</a>
-                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('blogs.*') ? 'active' : '' }}"
+                               href="{{ route('blogs.index') }}">Blogs</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"
                                href="{{ route('contact') }}">Contact</a>
@@ -195,7 +195,7 @@
             <li class="nav-item"><a class="nav-link" href="{{ route('services') }}">Services</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
             <!-- <li class="nav-item"><a class="nav-link" href="{{ route('giving') }}">Giving</a></li> -->
-            <!-- <li class="nav-item"><a class="nav-link" href="{{ route('insights.index') }}">Insights</a></li> -->
+            <li class="nav-item"><a class="nav-link" href="{{ route('blogs.index') }}">Blogs</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
         </ul>
         <div class="menu-btn-grup">

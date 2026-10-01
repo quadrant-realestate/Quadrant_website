@@ -1,7 +1,13 @@
 @extends('website.layout.app')
 
-@section('title', ($post->meta_title ?: $post->title) . ' — ' . setting('site_name', 'Quadrant Properties'))
-@section('meta_description', $post->meta_desc ?: Str::limit(strip_tags($post->excerpt ?? $post->body), 160))
+@php
+    $fallbackImage = URL::to('') . '/public/assets/images/og-image.jpg';
+    $heroImage     = \App\Services\Sanity::image($post['image'] ?? null, 1920, 800) ?? $fallbackImage;
+@endphp
+
+@section('title', ($post['metaTitle'] ?? null ?: $post['title']) . ' — ' . setting('site_name', 'Quadrant Properties'))
+@section('meta_description', $post['metaDescription'] ?? null ?: Str::limit($post['excerpt'] ?? strip_tags($bodyHtml), 160))
+@section('og_image', \App\Services\Sanity::image($post['image'] ?? null, 1200, 630) ?? $fallbackImage)
 
 @section('head')
 <style>
@@ -9,6 +15,7 @@
         position: relative;
         height: 360px;
         overflow: hidden;
+        background: #11203A;
     }
     .qp-article-hero img {
         width: 100%; height: 100%; object-fit: cover;
@@ -32,7 +39,7 @@
         color: #fff; font-size: 32px; margin: 0 0 10px; max-width: 760px;
     }
     .qp-article-meta .qp-byline {
-        color: #c7d2e2; font-size: 13px;
+        color: #c7d2e2; font-size: 13px; margin: 0;
     }
     .qp-article-body {
         max-width: 760px; margin: 0 auto;
@@ -40,10 +47,23 @@
         padding: 50px 20px;
     }
     .qp-article-body p { margin: 0 0 20px; }
-    .qp-article-body h2, .qp-article-body h3 {
+    .qp-article-body h2, .qp-article-body h3, .qp-article-body h4 {
         font-family: 'Cormorant Garamond', serif;
         color: #11203A; margin: 32px 0 14px;
     }
+    .qp-article-body ul, .qp-article-body ol { margin: 0 0 20px; padding-left: 22px; }
+    .qp-article-body li { margin: 0 0 8px; }
+    .qp-article-body li > ul, .qp-article-body li > ol { margin: 8px 0 0; }
+    .qp-article-body a { color: #11203A; text-decoration: underline; text-decoration-color: #C8A965; text-underline-offset: 3px; }
+    .qp-article-body blockquote {
+        margin: 28px 0; padding: 4px 0 4px 22px;
+        border-left: 3px solid #C8A965;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 21px; line-height: 1.5; color: #11203A;
+    }
+    .qp-article-body figure { margin: 32px 0; }
+    .qp-article-body figure img { width: 100%; height: auto; border-radius: 4px; }
+    .qp-article-body figcaption { font-size: 12px; color: #8a93a3; margin-top: 8px; text-align: center; }
     .qp-related-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -56,7 +76,7 @@
         box-shadow: 0 2px 14px rgba(11,29,58,.07);
         display: block;
     }
-    .qp-related-img { height: 150px; overflow: hidden; }
+    .qp-related-img { height: 150px; overflow: hidden; background: #e9ecf1; }
     .qp-related-img img { width: 100%; height: 100%; object-fit: cover; }
     .qp-related-body { padding: 16px; }
     .qp-related-body h4 {
@@ -70,22 +90,35 @@
 </style>
 @endsection
 
+@section('schema')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context'      => 'https://schema.org',
+    '@type'         => 'BlogPosting',
+    'headline'      => $post['title'],
+    'description'   => $post['excerpt'] ?? '',
+    'image'         => $heroImage,
+    'datePublished' => $post['publishedAt'],
+    'author'        => ['@type' => 'Organization', 'name' => $post['author'] ?? setting('site_name', 'Quadrant Properties')],
+    'mainEntityOfPage' => url()->current(),
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}
+</script>
+@endsection
+
 @section('content')
 
 {{-- ARTICLE HERO --}}
 <section class="qp-article-hero">
-    @if($post->main_image)
-        <img src="{{ URL::to('') }}/public/{{ $post->main_image }}" alt="{{ $post->title }}">
-    @else
-        <img src="{{ URL::to('') }}/public/assets/img/placeholder.jpg" alt="{{ $post->title }}">
-    @endif
+    <img src="{{ $heroImage }}" alt="{{ $post['imageAlt'] ?? $post['title'] }}">
     <div class="qp-article-meta">
         <div class="container">
-            <p class="qp-cat">{{ $categories[$post->category] ?? $post->category }}</p>
-            <h1>{{ $post->title }}</h1>
+            @if(!empty($post['category']['title']))
+                <p class="qp-cat">{{ $post['category']['title'] }}</p>
+            @endif
+            <h1>{{ $post['title'] }}</h1>
             <p class="qp-byline">
-                @if($post->author){{ $post->author }} &middot; @endif
-                {{ \Carbon\Carbon::parse($post->published_at)->format('d M Y') }}
+                @if(!empty($post['author'])){{ $post['author'] }} &middot; @endif
+                {{ \Carbon\Carbon::parse($post['publishedAt'])->format('d M Y') }}
             </p>
         </div>
     </div>
@@ -99,8 +132,8 @@
                 <div class="bread-container">
                     <ul>
                         <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="{{ route('insights.index') }}">Insights</a></li>
-                        <li><span>{{ $post->title }}</span></li>
+                        <li><a href="{{ route('blogs.index') }}">Blogs</a></li>
+                        <li><span>{{ $post['title'] }}</span></li>
                     </ul>
                 </div>
             </div>
@@ -109,9 +142,9 @@
 </section>
 
 {{-- ARTICLE BODY --}}
-<div class="qp-article-body">
-    {!! $post->body !!}
-</div>
+<article class="qp-article-body">
+    {!! $bodyHtml !!}
+</article>
 
 {{-- ENQUIRY PROMPT --}}
 <section style="background:#F4F5F7; padding:48px 0; border-top:2px solid #C8A965; text-align:center;">
@@ -128,24 +161,21 @@
 </section>
 
 {{-- RELATED ARTICLES --}}
-@if($relatedPosts->count() > 0)
+@if(!empty($post['related']))
 <section style="padding:56px 0;">
     <div class="container">
         <h2 style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#11203A; text-align:center; margin:0 0 30px;">
-            Related Insights
+            Related Articles
         </h2>
         <div class="qp-related-grid">
-            @foreach($relatedPosts as $related)
-                <a href="{{ route('insights.show', $related->slug) }}" class="qp-related-card">
+            @foreach($post['related'] as $related)
+                <a href="{{ route('blogs.show', $related['slug']) }}" class="qp-related-card">
                     <div class="qp-related-img">
-                        @if($related->main_image)
-                            <img src="{{ URL::to('') }}/public/{{ $related->main_image }}" alt="{{ $related->title }}">
-                        @else
-                            <img src="{{ URL::to('') }}/public/assets/img/placeholder.jpg" alt="{{ $related->title }}">
-                        @endif
+                        <img src="{{ \App\Services\Sanity::image($related['image'] ?? null, 520, 300) ?? $fallbackImage }}"
+                             alt="{{ $related['imageAlt'] ?? $related['title'] }}" loading="lazy">
                     </div>
                     <div class="qp-related-body">
-                        <h4>{{ $related->title }}</h4>
+                        <h4>{{ $related['title'] }}</h4>
                     </div>
                 </a>
             @endforeach
