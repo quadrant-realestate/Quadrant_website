@@ -3,6 +3,7 @@
   "installCommand": "echo skip",
   "buildCommand": "echo skip",
   "outputDirectory": "public",
+  "regions": ["dxb1"],
   "functions": {
     "api/index.php": {
       "runtime": "vercel-php@0.7.4",

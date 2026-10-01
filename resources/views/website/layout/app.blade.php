@@ -47,7 +47,7 @@
 
     {{-- CSS --}}
     <link href="{{ URL::to('') }}/public/assets/css/bootstrap.css"              rel="stylesheet">
-    <link href="{{ URL::to('') }}/public/assets/css/all.min.css"                rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="{{ URL::to('') }}/public/assets/css/owl.carousel.min.css"       rel="stylesheet">
     <link href="{{ URL::to('') }}/public/assets/css/owl.theme.default.css"      rel="stylesheet">
     <link href="{{ URL::to('') }}/public/assets/css/lightgallery.css"           rel="stylesheet">
