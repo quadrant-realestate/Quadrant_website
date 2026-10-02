@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => trim(env('MAIL_MAILER', 'smtp')),
 
     /*
     |--------------------------------------------------------------------------
@@ -37,11 +37,11 @@ return [
         'smtp' => [
             'transport' => 'smtp',
             'url' => env('MAIL_URL'),
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
+            'host' => trim(env('MAIL_HOST', 'smtp.mailgun.org')),
+            'port' => (int) trim(env('MAIL_PORT', 587)),
+            'encryption' => trim(env('MAIL_ENCRYPTION', 'tls')),
+            'username' => trim((string) env('MAIL_USERNAME')),
+            'password' => trim((string) env('MAIL_PASSWORD')),
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
         ],
@@ -108,8 +108,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => trim(env('MAIL_FROM_ADDRESS', 'hello@example.com')),
+        'name' => trim(env('MAIL_FROM_NAME', 'Example')),
     ],
 
     /*
