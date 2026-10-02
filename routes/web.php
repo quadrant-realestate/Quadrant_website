@@ -24,6 +24,7 @@ use App\Http\Controllers\CommunityFrontController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\SitemapController;
 
 use App\Http\Controllers\DevelopmentFloorPlanController;
 use App\Http\Controllers\DevelopmentAmenityController;
@@ -46,6 +47,9 @@ use Illuminate\Support\Facades\Route;
 ///////////////////////////////////////////////////////////
 // Homepage
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Sitemap for search engines
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // Contact
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
