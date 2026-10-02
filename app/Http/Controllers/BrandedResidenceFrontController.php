@@ -46,9 +46,12 @@ class BrandedResidenceFrontController extends Controller
         $residences  = $query->paginate(12)->withQueryString();
         $communities = DB::table('communities')->where('is_active', 1)->orderBy('name')->get();
 
+        $noindex     = $residences->total() === 0;
+
         return view('website.branded-residences.index', compact(
             'residences',
-            'communities'
+            'communities',
+            'noindex'
         ));
     }
 

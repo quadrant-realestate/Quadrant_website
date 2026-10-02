@@ -37,7 +37,23 @@ class SitemapController extends Controller
             'terms'                    => '0.2',
             'cookies'                  => '0.2',
         ];
+        // Listing pages that show "No results" when empty — Google treats those as
+        // soft 404s, so they're left out until they have at least one item.
+        $listings = [
+            'properties.sale'          => ['properties',         'listing_type', 'sale'],
+            'properties.rent'          => ['properties',         'listing_type', 'rent'],
+            'properties.private'       => ['properties',         'listing_type', 'private'],
+            'properties.international' => ['properties',         'listing_type', 'international'],
+            'investments.index'        => ['investments',        null,           null],
+            'branded-residences.index' => ['branded_residences', null,           null],
+            'developments.index'       => ['developments',       null,           null],
+            'communities.index'        => ['communities',        null,           null],
+        ];
+
         foreach ($static as $name => $priority) {
+            if (isset($listings[$name]) && !$this->hasItems(...$listings[$name])) {
+                continue;
+            }
             $urls[] = ['loc' => route($name), 'lastmod' => null, 'priority' => $priority];
         }
 
@@ -104,5 +120,21 @@ class SitemapController extends Controller
         return response($xml, 200)
             ->header('Content-Type', 'application/xml; charset=UTF-8')
             ->header('Cache-Control', 'public, max-age=3600');
+    }
+
+    // Same "active" rules as the front-end listing pages
+    private function hasItems(string $table, ?string $column, $value): bool
+    {
+        try {
+            [$activeColumn, $activeValue] = $table === 'properties' ? ['status', 'active'] : ['is_active', 1];
+
+            $query = DB::table($table)->where($activeColumn, $activeValue);
+            if ($column) {
+                $query->where($column, $value);
+            }
+            return $query->exists();
+        } catch (\Throwable $e) {
+            return true; // if unsure, keep the page listed
+        }
     }
 }

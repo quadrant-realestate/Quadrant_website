@@ -20,3 +20,6 @@ yarn-error.log
 # Local secrets and server logs
 .env
 error_log
+
+.vercel
+.env*

@@ -19,6 +19,10 @@
     {{-- SEO --}}
     <meta name="description" content="@yield('meta_description', 'Quadrant Properties Dubai — Luxury Real Estate in Dubai')">
     <meta name="csrf-token"  content="{{ csrf_token() }}">
+    @if (!empty($noindex))
+    {{-- Empty listing — keep out of Google until it has content --}}
+    <meta name="robots" content="noindex, follow">
+    @endif
 
     {{-- Open Graph --}}
     <meta property="og:type"        content="website">

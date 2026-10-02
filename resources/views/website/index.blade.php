@@ -1,8 +1,8 @@
 @extends('website.layout.app')
 @section('body-class', 'qp-home-page')
 
-@section('title', setting('site_name', 'Quadrant Properties') . ' — Know Where You Stand.')
-@section('meta_description', 'Dubai\'s finest off-plan and luxury residences — advised, never sold. ' . setting('site_name', 'Quadrant Properties') . '.')
+@section('title', setting('site_name', 'Quadrant Properties') . ' — Luxury & Off-Plan Real Estate in Dubai')
+@section('meta_description', 'Dubai\'s finest off-plan and luxury residences — villas, penthouses and apartments in Palm Jumeirah, Downtown and Dubai Hills. Advised, never sold.')
 
 @section('head')
 <style>

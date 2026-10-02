@@ -1,2 +1,5 @@
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /properties/search
+
+Sitemap: https://www.quadrant.ae/sitemap.xml

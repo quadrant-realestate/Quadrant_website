@@ -103,7 +103,9 @@ class PropertyFrontController extends Controller
         $propertyTypes = DB::table('property_types')->where('is_active', 1)->orderBy('sort_order')->get();
         $communities   = DB::table('communities')->where('is_active', 1)->orderBy('name')->get();
 
-        return view('website.properties.sale', compact('properties', 'propertyTypes', 'communities'));
+        $noindex       = $properties->total() === 0;
+
+        return view('website.properties.sale', compact('properties', 'propertyTypes', 'communities', 'noindex'));
     }
 
     // ============================================================
@@ -118,7 +120,9 @@ class PropertyFrontController extends Controller
         $propertyTypes = DB::table('property_types')->where('is_active', 1)->orderBy('sort_order')->get();
         $communities   = DB::table('communities')->where('is_active', 1)->orderBy('name')->get();
 
-        return view('website.properties.rent', compact('properties', 'propertyTypes', 'communities'));
+        $noindex       = $properties->total() === 0;
+
+        return view('website.properties.rent', compact('properties', 'propertyTypes', 'communities', 'noindex'));
     }
 
     // ============================================================
@@ -133,7 +137,9 @@ class PropertyFrontController extends Controller
         $propertyTypes = DB::table('property_types')->where('is_active', 1)->orderBy('sort_order')->get();
         $communities   = DB::table('communities')->where('is_active', 1)->orderBy('name')->get();
 
-        return view('website.properties.private', compact('properties', 'propertyTypes', 'communities'));
+        $noindex       = $properties->total() === 0;
+
+        return view('website.properties.private', compact('properties', 'propertyTypes', 'communities', 'noindex'));
     }
 
     // ============================================================
@@ -148,7 +154,9 @@ class PropertyFrontController extends Controller
         $propertyTypes = DB::table('property_types')->where('is_active', 1)->orderBy('sort_order')->get();
         $communities   = DB::table('communities')->where('is_active', 1)->orderBy('name')->get();
 
-        return view('website.properties.international', compact('properties', 'propertyTypes', 'communities'));
+        $noindex       = $properties->total() === 0;
+
+        return view('website.properties.international', compact('properties', 'propertyTypes', 'communities', 'noindex'));
     }
 
     // ============================================================
@@ -169,7 +177,9 @@ class PropertyFrontController extends Controller
         $propertyTypes = DB::table('property_types')->where('is_active', 1)->orderBy('sort_order')->get();
         $communities   = DB::table('communities')->where('is_active', 1)->orderBy('name')->get();
 
-        return view('website.properties.search', compact('properties', 'propertyTypes', 'communities'));
+        $noindex       = $properties->total() === 0;
+
+        return view('website.properties.search', compact('properties', 'propertyTypes', 'communities', 'noindex'));
     }
 
     // ============================================================

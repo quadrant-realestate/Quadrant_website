@@ -79,10 +79,13 @@ class InvestmentFrontController extends Controller
                               ->orderBy('investment_type')
                               ->pluck('investment_type');
 
+        $noindex = $investments->total() === 0;
+
         return view('website.investments.index', compact(
             'investments',
             'communities',
-            'investmentTypes'
+            'investmentTypes',
+            'noindex'
         ));
     }
 

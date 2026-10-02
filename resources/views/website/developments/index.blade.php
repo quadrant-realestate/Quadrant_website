@@ -1,6 +1,6 @@
 @extends('website.layout.app')
 
-@section('title', 'Buy — ' . setting('site_name', 'Quadrant Properties'))
+@section('title', 'Off-Plan Properties for Sale in Dubai — ' . setting('site_name', 'Quadrant Properties'))
 @section('meta_description', 'Dubai\'s future, available today. Explore landmark off-plan developments — each one assessed, shortlisted, and advised on with precision.')
 
 @section('head')
