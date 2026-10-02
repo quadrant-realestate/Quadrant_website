@@ -3,6 +3,17 @@
 // Vercel entry point. The deployed filesystem is read-only except /tmp,
 // so Laravel's compiled views and caches are redirected there.
 
+// Send PHP errors to stderr so they show up in Vercel's runtime logs;
+// fatal errors otherwise produce a blank 500 with nothing logged.
+ini_set('log_errors', '1');
+ini_set('error_log', 'php://stderr');
+register_shutdown_function(function () {
+    $e = error_get_last();
+    if ($e && in_array($e['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR], true)) {
+        file_put_contents('php://stderr', "PHP FATAL: {$e['message']} in {$e['file']}:{$e['line']}\n");
+    }
+});
+
 $tmp = '/tmp/laravel';
 foreach (['views', 'cache'] as $dir) {
     if (! is_dir("$tmp/$dir")) {
