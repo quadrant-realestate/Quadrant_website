@@ -114,6 +114,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Inquiry Notification Recipients
+    |--------------------------------------------------------------------------
+    |
+    | Comma-separated list of addresses that receive an email whenever a
+    | contact or inquiry form is submitted on the website.
+    |
+    */
+
+    'inquiry_recipients' => array_values(array_filter(array_map(
+        'trim',
+        explode(',', env('INQUIRY_NOTIFY_EMAILS', 'quadrantpropertiesai@gmail.com'))
+    ))),
+
+    /*
+    |--------------------------------------------------------------------------
     | Markdown Mail Settings
     |--------------------------------------------------------------------------
     |

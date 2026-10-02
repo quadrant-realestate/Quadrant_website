@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewInquiry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
 
 class HomeController extends Controller
@@ -96,7 +99,7 @@ class HomeController extends Controller
             'message'  => 'required|string|max:5000',
         ]);
 
-        DB::table('inquiries')->insert([
+        $id = DB::table('inquiries')->insertGetId([
             'name'         => trim($request->name),
             'email'        => trim($request->email),
             'phone'        => trim($request->phone),
@@ -108,6 +111,8 @@ class HomeController extends Controller
             'created_at'   => now(),
             'updated_at'   => now(),
         ]);
+
+        $this->notifyInquiry($id);
 
         return redirect()->back()->with(
             'success',
@@ -127,7 +132,7 @@ class HomeController extends Controller
             'phone'   => 'required|string|max:30',
         ]);
 
-        DB::table('inquiries')->insert([
+        $id = DB::table('inquiries')->insertGetId([
             'property_id'    => $request->property_id,
             'development_id' => $request->development_id,
             'name'           => trim($request->name),
@@ -142,6 +147,36 @@ class HomeController extends Controller
             'updated_at'     => now(),
         ]);
 
+        $this->notifyInquiry($id);
+
         return redirect()->back()->with('interest_success', 'Thank you! We will be in touch shortly.');
+    }
+
+    // ============================================================
+    // Email the team about a new inquiry. A mail failure must never
+    // block the visitor's submission, so errors are only logged.
+    // ============================================================
+    private function notifyInquiry(int $id): void
+    {
+        $recipients = config('mail.inquiry_recipients');
+        if (empty($recipients)) {
+            return;
+        }
+
+        try {
+            $inquiry = DB::table('inquiries')
+                          ->leftJoin('properties', 'inquiries.property_id', '=', 'properties.id')
+                          ->leftJoin('developments', 'inquiries.development_id', '=', 'developments.id')
+                          ->select(
+                              'inquiries.*',
+                              DB::raw('COALESCE(developments.title, properties.title) as subject_title')
+                          )
+                          ->where('inquiries.id', $id)
+                          ->first();
+
+            Mail::to($recipients)->send(new NewInquiry($inquiry));
+        } catch (\Throwable $e) {
+            Log::error('Inquiry notification email failed: ' . $e->getMessage(), ['inquiry_id' => $id]);
+        }
     }
 }
