@@ -289,6 +289,7 @@
 
                     <form id="contactForm" action="{{ route('inquiry.submit') }}" method="POST">
                         @csrf
+                        @include('website.partials.spam-trap')
                         <input type="hidden" name="inquiry_type" value="general">
                         <input type="hidden" name="source" value="investments_page">
 

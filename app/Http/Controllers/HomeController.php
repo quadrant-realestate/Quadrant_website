@@ -91,6 +91,13 @@ class HomeController extends Controller
     // ============================================================
     public function contactSubmit(Request $request)
     {
+        if ($this->looksLikeSpam($request, $request->message)) {
+            return redirect()->back()->with(
+                'success',
+                'Thank you for contacting us. One of our advisors will get in touch with you shortly.'
+            );
+        }
+
         $request->validate([
             'name'     => 'required|string|max:150',
             'email'    => 'required|email|max:255',
@@ -126,6 +133,10 @@ class HomeController extends Controller
     // ============================================================
     public function inquirySubmit(Request $request)
     {
+        if ($this->looksLikeSpam($request, $request->notes)) {
+            return redirect()->back()->with('interest_success', 'Thank you! We will be in touch shortly.');
+        }
+
         $request->validate([
             'name'    => 'required|string|max:150',
             'email'   => 'required|email',
@@ -150,6 +161,47 @@ class HomeController extends Controller
         $this->notifyInquiry($id);
 
         return redirect()->back()->with('interest_success', 'Thank you! We will be in touch shortly.');
+    }
+
+    // ============================================================
+    // Bot filter. Spam gets the normal "thank you" response so bots
+    // don't learn they were blocked, but nothing is saved or emailed.
+    // ============================================================
+    private function looksLikeSpam(Request $request, ?string $message): bool
+    {
+        // Hidden honeypot field (see website/partials/spam-trap) — humans leave it empty
+        if (filled($request->input('website'))) {
+            return $this->logSpam($request, 'honeypot');
+        }
+
+        // Submitted faster than a human could fill the form
+        if ($request->filled('form_ts')) {
+            try {
+                if (time() - (int) decrypt($request->input('form_ts')) < 3) {
+                    return $this->logSpam($request, 'too fast');
+                }
+            } catch (\Throwable $e) {
+                return $this->logSpam($request, 'bad timestamp');
+            }
+        }
+
+        // Real clients don't paste HTML links or URLs into an inquiry
+        $text = $message . ' ' . $request->input('name');
+        if (preg_match('~<a\s|href\s*=|\[url|https?://|www\.~i', $text)) {
+            return $this->logSpam($request, 'links in message');
+        }
+
+        return false;
+    }
+
+    private function logSpam(Request $request, string $reason): bool
+    {
+        Log::info('Blocked spam inquiry: ' . $reason, [
+            'ip'    => $request->ip(),
+            'email' => $request->input('email'),
+        ]);
+
+        return true;
     }
 
     // ============================================================

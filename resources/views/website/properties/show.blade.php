@@ -437,6 +437,7 @@
 
                         <form id="contactForm" action="{{ route('inquiry.submit') }}" method="POST">
                             @csrf
+                            @include('website.partials.spam-trap')
                             <input type="hidden" name="property_id" value="{{ $property->id }}">
                             <input type="hidden" name="inquiry_type" value="buy">
                             <input type="hidden" name="source" value="property_detail">

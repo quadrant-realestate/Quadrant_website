@@ -450,6 +450,7 @@
 
                 <form action="{{ route('inquiry.submit') }}" method="POST">
                     @csrf
+                    @include('website.partials.spam-trap')
                     <input type="hidden" name="development_id" value="{{ $development->id }}">
                     <input type="hidden" name="inquiry_type" value="general">
                     <input type="hidden" name="source" value="project_detail">
