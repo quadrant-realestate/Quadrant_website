@@ -23,7 +23,6 @@ use App\Http\Controllers\CommunityFrontController;
 
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\SitemapController;
 
 use App\Http\Controllers\DevelopmentFloorPlanController;
@@ -253,12 +252,6 @@ Route::group(['prefix' => '/admin'],function(){
         Route::get('/settings',        [SettingController::class, 'index'])->name('admin.settings.index');
         Route::post('/settings/update',[SettingController::class, 'update'])->name('admin.settings.update');
 
-        Route::get('/blog-posts',              [BlogPostController::class, 'index'])->name('admin.blog_posts.index');
-        Route::get('/blog-posts/create',       [BlogPostController::class, 'create'])->name('admin.blog_posts.create');
-        Route::post('/blog-posts',             [BlogPostController::class, 'store'])->name('admin.blog_posts.store');
-        Route::get('/blog-posts/{id}/edit',    [BlogPostController::class, 'edit'])->name('admin.blog_posts.edit');
-        Route::put('/blog-posts/{id}',         [BlogPostController::class, 'update'])->name('admin.blog_posts.update');
-        Route::delete('/blog-posts/{id}',      [BlogPostController::class, 'destroy'])->name('admin.blog_posts.destroy');
  
 
     });

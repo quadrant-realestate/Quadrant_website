@@ -58,22 +58,10 @@ class HomeController extends Controller
                                ->limit(6)
                                ->get();
 
-        // ── Section 9: Insights teaser — latest 3 published articles ──────
-        // Renders only once blog_posts table + InsightController exist.
-        $latestInsights = collect();
-        if (Schema::hasTable('blog_posts')) {
-            $latestInsights = DB::table('blog_posts')
-                                 ->where('is_published', 1)
-                                 ->orderBy('published_at', 'desc')
-                                 ->limit(3)
-                                 ->get();
-        }
-
         return view('website.index', compact(
             'featuredDevelopments',
             'priorityCommunityRecords',
-            'developerPartners',
-            'latestInsights'
+            'developerPartners'
         ));
     }
 

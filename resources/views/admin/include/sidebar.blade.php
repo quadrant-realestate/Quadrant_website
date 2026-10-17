@@ -389,43 +389,6 @@
       </ul>
     </li>
 
-    <!-- ==================== INSIGHTS ==================== -->
-    <li class="nav-small-cap">
-      <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
-      <span class="hide-menu">Insights</span>
-    </li>
-
-    <!-- Articles -->
-    <li class="sidebar-item">
-      <a class="sidebar-link justify-content-between has-arrow" href="javascript:void(0)" aria-expanded="false">
-        <div class="d-flex align-items-center gap-3">
-          <span class="d-flex">
-            <iconify-icon icon="solar:document-text-line-duotone"></iconify-icon>
-          </span>
-          <span class="hide-menu">Articles</span>
-        </div>
-      </a>
-      <ul aria-expanded="false" class="collapse first-level">
-        <li class="sidebar-item">
-          <a class="sidebar-link justify-content-between" href="{{ route('admin.blog_posts.create') }}">
-            <div class="d-flex align-items-center gap-3">
-              <span class="d-flex"><span class="icon-small"></span></span>
-              <span class="hide-menu">Add Article</span>
-            </div>
-            <span class="hide-menu badge bg-success-subtle text-success fs-1 py-1">New</span>
-          </a>
-        </li>
-        <li class="sidebar-item">
-          <a class="sidebar-link" href="{{ route('admin.blog_posts.index') }}">
-            <div class="d-flex align-items-center gap-3">
-              <span class="d-flex"><span class="icon-small"></span></span>
-              <span class="hide-menu">All Articles</span>
-            </div>
-          </a>
-        </li>
-      </ul>
-    </li>
-
     <!-- ==================== SETTINGS ==================== -->
     <li class="nav-small-cap">
       <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
