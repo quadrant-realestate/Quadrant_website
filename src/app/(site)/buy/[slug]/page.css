@@ -1,0 +1,183 @@
+/* Styles from website/developments/show.blade.php @section('head') */
+/* ============================================================
+   PROJECT DETAIL — brand-aligned, 11-section template
+============================================================ */
+.qp-pd-breadcrumb { padding: 18px 0; font-size: 12px; color: #5B6678; }
+.qp-pd-breadcrumb a { color: #5B6678; text-decoration: none; }
+.qp-pd-breadcrumb a:hover { color: #C8A965; }
+
+/* 1. Hero Gallery */
+.qp-pd-hero { position: relative; height: 480px; overflow: hidden; }
+.qp-pd-hero-track { display: flex; height: 100%; transition: transform .4s ease; }
+.qp-pd-hero-slide { min-width: 100%; height: 100%; }
+.qp-pd-hero-slide img { width: 100%; height: 100%; object-fit: cover; }
+.qp-pd-hero::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(11,29,58,.05) 0%, rgba(11,29,58,.75) 100%);
+    pointer-events: none;
+}
+.qp-pd-hero-overlay { position: absolute; bottom: 0; left: 0; right: 0; z-index: 2; padding: 30px 0; }
+.qp-pd-status-tag {
+    display: inline-block; background: #C8A965; color: #11203A;
+    font-size: 10px; letter-spacing: .5px; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 2px; font-weight: 700; margin-bottom: 12px;
+}
+.qp-pd-hero-overlay h1 {
+    font-family: 'Cormorant Garamond', serif; color: #fff; font-size: 34px; margin: 0; max-width: 760px;
+}
+.qp-pd-hero-nav {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+    width: 40px; height: 40px; background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.4); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: #fff; font-size: 18px; transition: background .2s ease;
+}
+.qp-pd-hero-nav:hover { background: rgba(255,255,255,.3); }
+.qp-pd-hero-prev { left: 24px; }
+.qp-pd-hero-next { right: 24px; }
+.qp-pd-hero-dots { position: absolute; bottom: 16px; right: 24px; z-index: 3; display: flex; gap: 6px; }
+.qp-pd-hero-dots span {
+    width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.4); cursor: pointer;
+}
+.qp-pd-hero-dots span.active { background: #C8A965; }
+
+/* 2. Key Facts Strip */
+.qp-pd-facts {
+    background: #F4F5F7; border-bottom: 1px solid #eef1f5;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.qp-pd-fact { padding: 22px 16px; text-align: center; border-right: 1px solid #e3e8ef; }
+.qp-pd-fact:last-child { border-right: none; }
+.qp-pd-fact .qp-fact-label {
+    font-size: 10px; letter-spacing: .5px; text-transform: uppercase; color: #5B6678; margin: 0 0 6px;
+}
+.qp-pd-fact .qp-fact-value {
+    font-family: 'Cormorant Garamond', serif; font-size: 17px; color: #11203A; font-weight: 600; margin: 0;
+}
+
+/* Layout */
+.qp-pd-main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+.qp-pd-grid { display: grid; grid-template-columns: 1fr 380px; gap: 50px; padding: 50px 0; }
+.qp-pd-section { margin-bottom: 48px; }
+.qp-pd-section h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: 22px; color: #11203A;
+    margin: 0 0 18px; padding-bottom: 12px; border-bottom: 2px solid #C8A965; display: inline-block;
+}
+.qp-pd-section p { font-size: 14px; line-height: 1.8; color: #1B2538; margin: 0 0 16px; }
+
+/* 4. Highlights / Amenities */
+.qp-amenity-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.qp-amenity-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #1B2538; }
+.qp-amenity-item svg { width: 18px; height: 18px; stroke: #C8A965; flex-shrink: 0; }
+
+/* 5. Floor Plans (tabbed) */
+.qp-fp-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+.qp-fp-tab {
+    padding: 9px 18px; font-size: 12px; letter-spacing: .3px; text-transform: uppercase;
+    border: 1px solid #d8dee5; border-radius: 2px; cursor: pointer; color: #5B6678;
+    background: #fff; transition: all .2s ease;
+}
+.qp-fp-tab.active { background: #11203A; border-color: #11203A; color: #fff; }
+.qp-fp-panel { display: none; }
+.qp-fp-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; }
+.qp-fp-img { border-radius: 4px; overflow: hidden; }
+.qp-fp-img img { width: 100%; display: block; }
+.qp-fp-meta p { font-size: 13px; color: #5B6678; margin: 0 0 14px; }
+.qp-fp-download {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid #C8A965; color: #C8A965; padding: 9px 18px;
+    font-size: 12px; letter-spacing: .3px; text-transform: uppercase; font-weight: 600;
+    border-radius: 2px; text-decoration: none; transition: all .2s ease;
+}
+.qp-fp-download:hover { background: #C8A965; color: #11203A; }
+
+/* 6. Payment Plan Table */
+.qp-pp-table { width: 100%; border-collapse: collapse; }
+.qp-pp-table th {
+    text-align: left; font-size: 11px; letter-spacing: .4px; text-transform: uppercase;
+    color: #5B6678; padding: 10px 14px; border-bottom: 2px solid #C8A965;
+}
+.qp-pp-table td {
+    font-size: 13px; color: #1B2538; padding: 12px 14px; border-bottom: 1px solid #eef1f5;
+}
+
+/* 7. Location */
+.qp-landmarks { list-style: none; padding: 0; margin: 18px 0 0; }
+.qp-landmarks li {
+    display: flex; justify-content: space-between; font-size: 13px;
+    padding: 10px 0; border-bottom: 1px solid #eef1f5; color: #1B2538;
+}
+.qp-landmarks li span:last-child { color: #5B6678; }
+
+/* 8. Quadrant's View — highlighted callout (differentiator) */
+.qp-view-callout {
+    background: #11203A; border-left: 4px solid #C8A965;
+    border-radius: 4px; padding: 28px 30px; margin: 0 0 48px;
+}
+.qp-view-callout .qp-view-label {
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: #C8A965; font-weight: 700; margin: 0 0 12px;
+}
+.qp-view-callout p {
+    font-family: 'Cormorant Garamond', serif; font-size: 17px; line-height: 1.7;
+    color: #fff; margin: 0; font-style: italic;
+}
+
+/* 9. Register Interest Sidebar */
+.qp-pd-sidebar { position: sticky; top: 100px; align-self: start; }
+.qp-pd-form-card {
+    background: #F4F5F7; border-radius: 4px; padding: 28px; margin-bottom: 24px;
+}
+.qp-pd-form-card h3 {
+    font-family: 'Cormorant Garamond', serif; font-size: 19px; color: #11203A; margin: 0 0 18px;
+}
+.qp-pd-form-card .form-group { margin-bottom: 14px; }
+.qp-pd-form-card label { font-size: 11px; letter-spacing: .4px; text-transform: uppercase; color: #5B6678; display: block; margin-bottom: 6px; }
+.qp-pd-form-card .form-control { border: 1px solid #dfe5ec; border-radius: 2px; padding: 10px 12px; font-size: 13px; width: 100%; }
+.qp-pd-checkbox { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #5B6678; margin-bottom: 18px; }
+.qp-pd-submit {
+    width: 100%; background: #11203A; color: #fff; border: none; padding: 12px;
+    font-size: 12px; letter-spacing: .4px; text-transform: uppercase; font-weight: 600;
+    border-radius: 2px; cursor: pointer;
+}
+.qp-pd-contact-card { background: #fff; border: 1px solid #eef1f5; border-radius: 4px; padding: 22px; }
+.qp-pd-contact-card a {
+    display: flex; align-items: center; gap: 10px; font-size: 13px; color: #1B2538;
+    text-decoration: none; padding: 8px 0;
+}
+
+/* 10. Related Projects */
+.qp-related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+
+/* 11. RERA Footer */
+.qp-rera-footer {
+    background: #F4F5F7; border-top: 1px solid #eef1f5; padding: 24px 0;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+.qp-rera-footer .qp-rera-text { font-size: 12px; color: #5B6678; }
+.qp-rera-footer .qp-rera-qr img { height: 70px; width: 70px; object-fit: contain; }
+
+@media (max-width: 991px) {
+    .qp-pd-grid { grid-template-columns: 1fr; }
+    .qp-pd-facts { grid-template-columns: repeat(2, 1fr); }
+    .qp-amenity-grid { grid-template-columns: repeat(2, 1fr); }
+    .qp-fp-panel.active { grid-template-columns: 1fr; }
+    .qp-related-grid { grid-template-columns: 1fr; }
+    .qp-pd-sidebar { position: static; }
+}
+
+/* Location grid — 2 columns desktop, 1 column mobile */
+.qp-location-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 28px;
+align-items: start;
+}
+@media (max-width: 767px) {
+.qp-location-grid {
+    grid-template-columns: 1fr !important;
+}
+.qp-location-grid > div:first-child {
+    margin-bottom: 16px;
+}
+}

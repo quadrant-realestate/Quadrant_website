@@ -1,0 +1,30 @@
+/* Styles from website/communities/index.blade.php @section('head') */
+.banner.inr-banner {
+    min-height: 300px;
+    padding-top: 72px;
+    padding-bottom: 72px;
+    border-radius: 0;
+    position: relative;
+    overflow: unset;
+    height: auto;
+    margin-bottom: 0;
+}
+
+
+.qp-offplan-banner {
+    background: #11203A;
+    padding: 64px 0 40px;
+    text-align: center;
+}
+.qp-offplan-banner h1 {
+    font-family: 'Cormorant Garamond', serif;
+    color: #fff;
+    font-size: 36px;
+    margin: 0 0 14px;
+}
+.qp-offplan-banner p {
+    color: #c7d2e2;
+    font-size: 15px;
+    max-width: 620px;
+    margin: 0 auto;
+}

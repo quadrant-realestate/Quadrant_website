@@ -1,0 +1,130 @@
+/* Global site styles that were inline in the Blade layout (website/layout/app.blade.php),
+   header (include/header.blade.php) and footer (include/footer.blade.php).
+   The original theme stylesheets are loaded as <link> tags in the layout. */
+
+body {
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  color: #1b2538;
+}
+body.qp-home-page {
+  padding-top: 0 !important;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+/* ===========================================================
+   QUADRANT HEADER — fixed, transparent-to-navy on scroll
+=========================================================== */
+#qp-header.qp-scrolled {
+  background: #11203a;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.18);
+}
+#qp-header .logo-box img {
+  max-height: 40px;
+  height: auto;
+  transition: max-height 0.3s ease;
+}
+#qp-header .navbar-nav .nav-link {
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  font-weight: 500;
+  padding: 8px 14px !important;
+  transition: color 0.2s ease;
+}
+#qp-header .navbar-nav .nav-link:hover,
+#qp-header .navbar-nav .nav-link.active {
+  color: #c8a965 !important;
+  text-shadow: none;
+}
+/* Force white on scroll state too */
+#qp-header.qp-scrolled .navbar-nav .nav-link {
+  color: #ffffff !important;
+  text-shadow: none;
+}
+#qp-header.qp-scrolled .navbar-nav .nav-link:hover,
+#qp-header.qp-scrolled .navbar-nav .nav-link.active {
+  color: #c8a965 !important;
+}
+#qp-header .EndSide a[href*="contact"] {
+  text-shadow: none;
+}
+#qp-header .navbar {
+  padding: 4px 0 !important;
+}
+.qp-cta-outline {
+  border: 1px solid #c8a965;
+  color: #c8a965;
+  background: transparent;
+  padding: 10px 20px;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+.qp-cta-outline:hover {
+  background: #c8a965;
+  color: #11203a;
+}
+
+/* ===========================================================
+   FOOTER
+=========================================================== */
+.qp-footer-social a {
+  color: #c8a965;
+  font-size: 20px;
+  transition: color 0.2s ease;
+}
+.qp-footer-social a:hover {
+  color: #fff;
+}
+
+/* Floating WhatsApp button */
+.floating_btn {
+  position: fixed;
+  bottom: 30px;
+  right: 36px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+@keyframes pulsing {
+  to {
+    box-shadow: 0 0 0 30px rgba(232, 76, 61, 0);
+  }
+}
+.contact_icon {
+  background-color: #42db87;
+  color: #fff;
+  width: 53px;
+  height: 53px;
+  font-size: 30px;
+  border-radius: 50px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translatey(0px);
+  box-shadow: 0 0 0 0 #42db87;
+  animation: pulsing 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+  font-weight: normal;
+  font-family: sans-serif;
+  text-decoration: none !important;
+  transition: all 300ms ease-in-out;
+}
+@media (max-width: 575px) {
+  .floating_btn {
+    right: -10px;
+    bottom: 5px;
+  }
+}

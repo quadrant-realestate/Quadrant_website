@@ -1,0 +1,11 @@
+/* Styles from website/communities/show.blade.php @section('head') */
+.banner.inr-banner {
+    min-height: 300px;
+    padding-top: 72px;
+    padding-bottom: 72px;
+    border-radius: 0;
+    position: relative;
+    overflow: unset;
+    height: auto;
+    margin-bottom: 0;
+}

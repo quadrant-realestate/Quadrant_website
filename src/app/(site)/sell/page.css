@@ -1,0 +1,325 @@
+    /* ============================================================
+       SELL PAGE — Quadrant brand system
+    ============================================================ */
+
+    /* Hero */
+    .qp-sell-hero {
+        position: relative;
+        min-height: 480px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+    .qp-sell-hero img.qp-sell-hero-bg {
+        position: absolute; inset: 0;
+        width: 100%; height: 100%;
+        object-fit: cover; z-index: 0;
+    }
+    .qp-sell-hero::after {
+        content: '';
+        position: absolute; inset: 0;
+        background: linear-gradient(90deg, rgba(11,29,58,.85) 0%, rgba(11,29,58,.55) 55%, rgba(11,29,58,.15) 100%);
+        z-index: 1;
+    }
+    .qp-sell-hero-inner {
+        position: relative; z-index: 2;
+        max-width: 600px;
+        padding: 60px 20px;
+    }
+    .qp-sell-hero-inner .qp-rule {
+        width: 56px; height: 2px;
+        background: #C8A965;
+        margin: 0 0 22px;
+    }
+    .qp-sell-hero-inner h1 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 40px;
+        color: #fff;
+        margin: 0 0 18px;
+        line-height: 1.2;
+    }
+    .qp-sell-hero-inner p {
+        color: #d7e0ee;
+        font-size: 15px;
+        line-height: 1.75;
+        margin: 0 0 28px;
+        max-width: 480px;
+    }
+    .qp-sell-hero-inner a {
+        display: inline-block;
+        background: #C8A965;
+        color: #11203A;
+        padding: 13px 28px;
+        font-size: 12px;
+        letter-spacing: .5px;
+        text-transform: uppercase;
+        font-weight: 700;
+        border-radius: 2px;
+        text-decoration: none;
+        transition: background .2s ease;
+    }
+    .qp-sell-hero-inner a:hover { background: #b8965a; color: #11203A; }
+
+    /* Why Sell section */
+    .qp-sell-why {
+        padding: 64px 0;
+        background: #F4F5F7;
+    }
+    .qp-sell-why-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+        margin-top: 40px;
+    }
+    .qp-sell-why-card {
+        background: #fff;
+        border-radius: 4px;
+        padding: 32px 26px;
+        box-shadow: 0 2px 14px rgba(11,29,58,.06);
+        border-top: 3px solid transparent;
+        transition: border-color .2s ease;
+    }
+    .qp-sell-why-card:hover { border-top-color: #C8A965; }
+    .qp-sell-why-card .qp-icon {
+        width: 48px; height: 48px;
+        border-radius: 50%;
+        border: 1px solid #C8A965;
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 18px;
+    }
+    .qp-sell-why-card .qp-icon svg {
+        width: 22px; height: 22px;
+        stroke: #C8A965;
+    }
+    .qp-sell-why-card h3 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 19px;
+        color: #11203A;
+        margin: 0 0 10px;
+    }
+    .qp-sell-why-card p {
+        font-size: 13px;
+        color: #5B6678;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    /* Step by Step */
+    .qp-sell-steps { padding: 64px 0; }
+    .qp-sell-steps-heading {
+        text-align: center;
+        margin-bottom: 44px;
+    }
+    .qp-sell-steps-heading .qp-rule {
+        width: 56px; height: 2px;
+        background: #C8A965;
+        margin: 0 auto 18px;
+    }
+    .qp-sell-steps-heading h2 {
+        /* font-size: 13px; */
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: #11203A;
+        font-weight: 700;
+        margin: 0;
+    }
+    .qp-steps-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 22px;
+    }
+    .qp-step-card {
+        background: #fff;
+        border: 1px solid #e3e8ef;
+        border-radius: 4px;
+        padding: 28px 22px;
+        position: relative;
+        transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .qp-step-card:hover {
+        border-color: #C8A965;
+        box-shadow: 0 6px 20px rgba(11,29,58,.08);
+    }
+    .qp-step-number {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 36px;
+        font-weight: 600;
+        color: #C8A965;
+        line-height: 1;
+        margin-bottom: 16px;
+        display: block;
+    }
+    .qp-step-icon {
+        width: 52px; height: 52px;
+        background: #F4F5F7;
+        border-radius: 4px;
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 18px;
+    }
+    .qp-step-icon svg {
+        width: 26px; height: 26px;
+        stroke: #11203A;
+    }
+    .qp-step-card h3 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 18px;
+        color: #11203A;
+        margin: 0 0 10px;
+    }
+    .qp-step-card p {
+        font-size: 13px;
+        color: #5B6678;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    /* Valuation CTA band */
+    .qp-sell-cta {
+        background: #11203A;
+        padding: 64px 0;
+        text-align: center;
+    }
+    .qp-sell-cta h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 28px;
+        color: #fff;
+        margin: 0 0 12px;
+    }
+    .qp-sell-cta p {
+        color: #c7d2e2;
+        font-size: 15px;
+        margin: 0 0 28px;
+        max-width: 560px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .qp-sell-cta a {
+        display: inline-block;
+        background: #C8A965;
+        color: #11203A;
+        padding: 13px 28px;
+        font-size: 12px;
+        letter-spacing: .5px;
+        text-transform: uppercase;
+        font-weight: 700;
+        border-radius: 2px;
+        text-decoration: none;
+        transition: background .2s ease;
+    }
+    .qp-sell-cta a:hover { background: #b8965a; }
+
+    /* Enquiry Form */
+    .qp-sell-form { padding: 64px 0; background: #F4F5F7; }
+    .qp-sell-form-inner {
+        max-width: 680px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 4px;
+        padding: 40px;
+        box-shadow: 0 2px 20px rgba(11,29,58,.07);
+    }
+    .qp-sell-form-inner h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 24px;
+        color: #11203A;
+        margin: 0 0 8px;
+    }
+    .qp-sell-form-inner p {
+        font-size: 14px;
+        color: #5B6678;
+        margin: 0 0 28px;
+    }
+    .qp-sf-group { margin-bottom: 16px; }
+    .qp-sf-group label {
+        display: block;
+        font-size: 10px;
+        letter-spacing: .5px;
+        text-transform: uppercase;
+        color: #5B6678;
+        font-weight: 700;
+        margin-bottom: 7px;
+    }
+    .qp-sf-group input,
+    .qp-sf-group select,
+    .qp-sf-group textarea {
+        width: 100%;
+        border: 1px solid #dfe5ec;
+        border-radius: 2px;
+        padding: 11px 14px;
+        font-size: 14px;
+        color: #1B2538;
+        background: #fff;
+        font-family: 'Inter', sans-serif;
+        transition: border-color .2s ease;
+    }
+    .qp-sf-group input:focus,
+    .qp-sf-group select:focus,
+    .qp-sf-group textarea:focus {
+        outline: none;
+        border-color: #C8A965;
+    }
+    .qp-sf-group textarea { resize: vertical; min-height: 100px; }
+    .qp-sf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .qp-sf-submit {
+        width: 100%;
+        background: #11203A;
+        color: #fff;
+        border: none;
+        padding: 13px;
+        font-size: 12px;
+        letter-spacing: .5px;
+        text-transform: uppercase;
+        font-weight: 600;
+        border-radius: 2px;
+        cursor: pointer;
+        margin-top: 6px;
+        transition: background .2s ease;
+    }
+    .qp-sf-submit:hover { background: #0B1D3A; }
+
+    /* Responsive */
+    @media (max-width: 991px) {
+        .qp-sell-why-grid { grid-template-columns: 1fr; }
+        .qp-steps-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 575px) {
+        .qp-sell-hero-inner h1 { font-size: 30px; }
+        .qp-steps-grid { grid-template-columns: 1fr; }
+        .qp-sf-row { grid-template-columns: 1fr; }
+        .qp-sell-form-inner { padding: 28px 20px; }
+    }
+
+
+    .qp-services-cta {
+        background: #F4F5F7;
+        padding: 56px 0;
+        text-align: center;
+        border-top: 2px solid #C8A965;
+    }
+    .qp-services-cta h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 26px;
+        color: #11203A;
+        margin: 0 0 12px;
+    }
+    .qp-services-cta p {
+        color: #5B6678;
+        font-size: 14px;
+        margin: 0 0 26px;
+    }
+    .qp-services-cta a {
+        display: inline-block;
+        background: #11203A;
+        color: #fff;
+        padding: 13px 28px;
+        font-size: 13px;
+        letter-spacing: .4px;
+        text-transform: uppercase;
+        font-weight: 600;
+        border-radius: 2px;
+        text-decoration: none;
+    }
+
+    @media (max-width: 575px) {
+        .qp-service-block { grid-template-columns: 1fr; gap: 8px; }
+    }
