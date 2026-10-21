@@ -12,7 +12,17 @@ export function siteUrl(path = ""): string {
 export function asset(path: string | null | undefined): string {
   if (!path) return "";
   if (/^(https?:)?\/\//.test(path) || path.startsWith("data:")) return path;
-  return `/public/${path.replace(/^\/+/, "").replace(/^public\//, "")}`;
+  const clean = path.replace(/^\/+/, "").replace(/^public\//, "");
+  // Encode each segment so file names with spaces or commas ("Image Aug 9, 2026.png") are served.
+  return `/public/${clean.split("/").map((s) => encodeURIComponent(safeDecode(s))).join("/")}`;
+}
+
+function safeDecode(segment: string): string {
+  try {
+    return decodeURIComponent(segment);
+  } catch {
+    return segment;
+  }
 }
 
 /** Absolute version of asset(), for Open Graph tags and JSON-LD. */

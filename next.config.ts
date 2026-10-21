@@ -2,8 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // The Laravel site served every static file under /public/... — keep those URLs working.
+  // Uploaded files live in public/uploads too, so they are served as static files (Vercel can't read UPLOAD_DIR at runtime).
   async rewrites() {
-    return [{ source: "/public/:path((?!uploads/).*)", destination: "/:path" }];
+    return [{ source: "/public/:path*", destination: "/:path*" }];
   },
   async redirects() {
     return [

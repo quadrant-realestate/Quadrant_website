@@ -1,5 +1,7 @@
 // Small PHP/Laravel behaviour helpers shared by the /buy and /communities pages.
 
+import { asset } from "@/lib/url";
+
 /** PHP truthiness for DB/request values: null, "", "0", 0 and false are falsy ("0.00" is truthy). */
 export function truthy<T>(v: T | null | undefined | "" | 0 | false): v is T {
   return v !== null && v !== undefined && v !== "" && v !== "0" && v !== 0 && v !== false;
@@ -42,5 +44,5 @@ export function pageNumber(value: string | undefined): number {
 
 /** "/public/<path>" exactly as `URL::to('') . '/public/' . $path` (empty path → "/public/"). */
 export function publicPath(path: string | null | undefined): string {
-  return `/public/${path ?? ""}`;
+  return path ? asset(path) : "/public/";
 }
