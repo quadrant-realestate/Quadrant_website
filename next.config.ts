@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
       { source: "/insights/:slug", destination: "/blogs/:slug", permanent: true },
     ];
   },
+  // Bundled copy of the site content, read on Vercel (see src/lib/db.ts).
+  outputFileTracingIncludes: {
+    "/**": ["./database/quadrant.sqlite"],
+  },
   experimental: {
     // Plain 404 page for unknown URLs (the site and admin panel have separate root layouts).
     globalNotFound: true,

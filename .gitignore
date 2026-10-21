@@ -52,7 +52,8 @@ next-env.d.ts
 /config
 /app
 /api
-/database
+/database/*
+!/database/quadrant.sqlite
 /resources
 /routes
 /tests
