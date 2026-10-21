@@ -24,12 +24,12 @@ export default async function PropertiesForRentPage({ searchParams }: Props) {
   const config: ListingConfig = {
     path: PATH,
     heading: "Rent Properties in Dubai",
-    bannerImage: "/public/assets/img/rent.png",
+    bannerImage: "/public/assets/img/buy.png",
     bannerListingType: "rent",
     searchPlaceholder: "Search country and city...",
     breadcrumb: { href: PATH, label: "Rent" },
     cta: {
-      image: "/public/assets/img/rent.png",
+      image: "/public/assets/img/buy.png",
       heading: `Luxury Homes for Rent by ${siteName ?? ""}`,
       text: RENT_CTA_TEXT,
     },

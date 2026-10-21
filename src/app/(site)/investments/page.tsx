@@ -73,7 +73,7 @@ export default async function InvestmentsPage({ searchParams }: Props) {
       {/* INNER BANNER WITH SEARCH FORM */}
       <section
         className="banner inr-banner"
-        style={{ backgroundImage: "url('/public/assets/images/image_17507627170.jpg')" }}
+        style={{ backgroundImage: "url('/public/assets/images/quadrant-skyline-night.jpg')" }}
       >
         <div className="container">
           <div className="slider-info">
@@ -159,7 +159,7 @@ export default async function InvestmentsPage({ searchParams }: Props) {
       {/* CTA STRIP */}
       <section className="CTA-strip space pb-0">
         <div className="container">
-          <div className="row" style={{ backgroundImage: "url('/public/assets/images/image_17507627170.jpg')" }}>
+          <div className="row" style={{ backgroundImage: "url('/public/assets/images/quadrant-skyline-night.jpg')" }}>
             <div className="col-lg-6">
               <div className="heading-pnel fff m-0">
                 <h2 className="m-0">Exclusive Investment Opportunities in Dubai</h2>

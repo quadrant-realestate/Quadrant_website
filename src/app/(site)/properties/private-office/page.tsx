@@ -24,12 +24,12 @@ export default async function PrivateOfficePage({ searchParams }: Props) {
   const config: ListingConfig = {
     path: PATH,
     heading: "Private Office Listings in Dubai",
-    bannerImage: "/public/assets/img/rent.png",
+    bannerImage: "/public/assets/img/buy.png",
     bannerListingType: "private",
     searchPlaceholder: "Search country and city...",
     breadcrumb: { href: PATH, label: "Private Office" },
     cta: {
-      image: "/public/assets/img/rent.png",
+      image: "/public/assets/img/buy.png",
       heading: `Luxury Homes for Rent by ${siteName ?? ""}`,
       text: RENT_CTA_TEXT,
     },

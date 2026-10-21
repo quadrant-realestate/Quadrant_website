@@ -24,12 +24,12 @@ export default async function InternationalPropertiesPage({ searchParams }: Prop
   const config: ListingConfig = {
     path: PATH,
     heading: "International Properties",
-    bannerImage: "/public/assets/img/rent.png",
+    bannerImage: "/public/assets/img/buy.png",
     bannerListingType: "international",
     searchPlaceholder: "Search country and city...",
     breadcrumb: { href: PATH, label: "International" },
     cta: {
-      image: "/public/assets/img/rent.png",
+      image: "/public/assets/img/buy.png",
       heading: `Luxury Homes for Rent by ${siteName ?? ""}`,
       text: RENT_CTA_TEXT,
     },
