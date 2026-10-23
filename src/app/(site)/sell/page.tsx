@@ -4,8 +4,8 @@ import { setting } from "@/lib/settings";
 import { FallbackImg } from "../_home/FallbackImg";
 import "./page.css";
 
-// Rendered on every request, like the Laravel page (settings and database content are always current).
-export const dynamic = "force-dynamic";
+// Cached for a minute, then rebuilt with the latest settings and content.
+export const revalidate = 60;
 
 export async function generateMetadata() {
   return pageMetadata({

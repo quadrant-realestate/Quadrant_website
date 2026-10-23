@@ -17,6 +17,11 @@ const nextConfig: NextConfig = {
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
         ],
       },
+      {
+        // Browsers keep images, video and fonts for a week instead of re-checking them on every visit.
+        source: "/public/:file(.*\\.(?:png|jpe?g|jfif|webp|avif|gif|svg|ico|mp4|webm|woff2?|ttf|otf))",
+        headers: [{ key: "Cache-Control", value: "public, max-age=604800, stale-while-revalidate=86400" }],
+      },
     ];
   },
   async redirects() {

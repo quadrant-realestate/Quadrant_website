@@ -18,7 +18,7 @@ import "./page.css";
 
 // website/developments/index.blade.php — DevelopmentFrontController@index
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 type Props = { searchParams: Promise<SearchParams> };
 

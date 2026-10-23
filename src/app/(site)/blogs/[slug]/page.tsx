@@ -13,6 +13,11 @@ import "./page.css";
 
 type Props = { params: Promise<{ slug: string }> };
 
+// No pages are built in advance; each one is cached the first time it is visited.
+export function generateStaticParams() {
+  return [];
+}
+
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const post = await getBlogPost(slug);

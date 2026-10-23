@@ -11,7 +11,7 @@ import "./page.css";
 
 // website/communities/index.blade.php — CommunityFrontController@index
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 type Props = { searchParams: Promise<SearchParams> };
 

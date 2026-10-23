@@ -41,6 +41,11 @@ const LISTING_LABELS: Record<string, string> = {
   international: "International",
 };
 
+// No pages are built in advance; each one is cached the first time it is visited.
+export function generateStaticParams() {
+  return [];
+}
+
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const property = await getProperty(slug);

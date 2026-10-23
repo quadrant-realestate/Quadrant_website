@@ -26,7 +26,12 @@ import "./page.css";
 // When no development matches the slug, Laravel fell back to an active branded residence with
 // that slug (rendering website.branded-residences.show at this URL), otherwise 404.
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
+
+// No pages are built in advance; each one is cached the first time it is visited.
+export function generateStaticParams() {
+  return [];
+}
 
 type Props = { params: Promise<{ slug: string }> };
 

@@ -19,6 +19,11 @@ type Props = { params: Promise<{ slug: string }> };
 
 const PLACEHOLDER = "/public/assets/img/placeholder.jpg";
 
+// No pages are built in advance; each one is cached the first time it is visited.
+export function generateStaticParams() {
+  return [];
+}
+
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const residence = await getResidence(slug);

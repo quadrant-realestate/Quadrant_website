@@ -14,7 +14,12 @@ import "./page.css";
 // The properties / developments sections of the Blade page are commented out, so they are not
 // rendered; only the property icon count is loaded, for the lazy-loading attributes (see query).
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
+
+// No pages are built in advance; each one is cached the first time it is visited.
+export function generateStaticParams() {
+  return [];
+}
 
 type Props = { params: Promise<{ slug: string }> };
 

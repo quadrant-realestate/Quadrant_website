@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1 };
 
-// Pages read the database and settings on every request (like the Laravel site), never at build time.
-export const dynamic = "force-dynamic";
+// Pages are cached and rebuilt at most once a minute, so edits show within about 60 seconds.
+export const revalidate = 60;
 
 const GA_ID = "G-7Q2LFB01BK";
 
