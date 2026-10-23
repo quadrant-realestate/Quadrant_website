@@ -1,5 +1,8 @@
+import { FloatingContact } from "@/components/site/FloatingContact";
 import Link from "@/components/site/Link";
 import { pick, type Settings } from "@/lib/settings";
+
+export const GOOGLE_REVIEW_URL = "https://g.page/r/CbmTkqwRHGJPEAE/review";
 
 const FOOTER_COMMUNITIES: [slug: string, name: string][] = [
   ["downtown-dubai", "Downtown Dubai"],
@@ -106,7 +109,17 @@ export function Footer({ settings }: { settings: Settings }) {
             <div className="col-lg-4 col-md-6 col-12 mb-4">
               <h6 style={heading}>Contact</h6>
               <ul style={list}>
-                {address && <li style={{ ...item, color: "#8a9ab5", fontSize: 13, lineHeight: 1.5 }}>{address}</li>}
+                {address && (
+                  <li style={{ ...item, lineHeight: 1.5 }}>
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
+                      target="_blank"
+                      style={link}
+                    >
+                      <i className="fa-solid fa-location-dot" style={icon} /> {address}
+                    </a>
+                  </li>
+                )}
 
                 {phone && (
                   <li style={item}>
@@ -123,6 +136,12 @@ export function Footer({ settings }: { settings: Settings }) {
                     </a>
                   </li>
                 )}
+
+                <li style={item}>
+                  <a href={GOOGLE_REVIEW_URL} target="_blank" style={link}>
+                    <i className="fa-brands fa-google" style={icon} /> Leave us a Google review
+                  </a>
+                </li>
 
                 {/* Social Icons Row */}
                 <li style={{ marginTop: 8 }}>
@@ -174,17 +193,10 @@ export function Footer({ settings }: { settings: Settings }) {
         </div>
       </footer>
 
-      <div className="floating_btn">
-        <a
-          target="_blank"
-          href={`https://api.whatsapp.com/send/?phone=${digits(s("whatsapp_number", "971524233010"))}&text&type=phone_number`}
-          style={{ textDecoration: "none" }}
-        >
-          <div className="contact_icon">
-            <i className="fab fa-whatsapp my-float" style={{ fontSize: 30 }} />
-          </div>
-        </a>
-      </div>
+      <FloatingContact
+        whatsapp={digits(s("whatsapp_number", "971524233010"))}
+        phone={phone ?? "+971524233010"}
+      />
     </>
   );
 }

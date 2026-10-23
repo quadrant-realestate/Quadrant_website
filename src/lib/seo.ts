@@ -19,6 +19,27 @@ type PageSeo = {
 const DEFAULT_DESCRIPTION = "Quadrant Properties Dubai — Luxury Real Estate in Dubai";
 
 /**
+ * Meta description Google shows in full: tags stripped, the fallback added when the text is
+ * very short, and cut at a word boundary to at most 158 characters.
+ */
+export function fitDescription(text: string | null | undefined, fallback: string): string {
+  const entities: Record<string, string> = { amp: "&", quot: '"', apos: "'", nbsp: " ", rsquo: "’", lsquo: "‘" };
+  const clean = (s: string) =>
+    s
+      .replace(/<[^>]*>/g, " ")
+      .replace(/&(#\d+|[a-z]+);/gi, (m, e: string) =>
+        e[0] === "#" ? String.fromCharCode(Number(e.slice(1))) : (entities[e.toLowerCase()] ?? m),
+      )
+      .replace(/\s+/g, " ")
+      .trim();
+  let d = clean(text ?? "");
+  if (d.length < 70) d = d ? `${d.replace(/[.\s]*$/, ".")} ${clean(fallback)}` : clean(fallback);
+  if (d.length <= 158) return d;
+  const cut = d.slice(0, 157);
+  return cut.slice(0, cut.lastIndexOf(" ")).replace(/[\s,;:.—-]+$/, "") + "…";
+}
+
+/**
  * Builds the same head tags the Blade layout produced: title, description,
  * Open Graph, Twitter card and canonical.
  */

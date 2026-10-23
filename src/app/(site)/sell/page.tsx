@@ -101,8 +101,8 @@ export default function SellPage() {
                 <span className="qp-step-number">{number}</span>
                 <div className="qp-step-icon">
                   {/* First 3 page images stayed eager (LazyLoadImages middleware): hero, icons 1 and 2 */}
-                  {/* eslint-disable-next-line jsx-a11y/alt-text -- no alt in the original markup */}
                   <img
+                    alt=""
                     {...(i >= 2 ? { loading: "lazy", decoding: "async" } : {})}
                     src={`/public/assets/img/${i + 1}-icon.png`}
                     width="35"

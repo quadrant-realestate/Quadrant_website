@@ -9,7 +9,7 @@ import {
   getDevelopmentGallery,
   getRelatedDevelopments,
 } from "@/lib/queries/developments";
-import { pageMetadata } from "@/lib/seo";
+import { fitDescription, pageMetadata } from "@/lib/seo";
 import { getSettings, pick } from "@/lib/settings";
 import { formTimestamp } from "@/lib/spam";
 import { asset, siteUrl } from "@/lib/url";
@@ -52,19 +52,21 @@ export async function generateMetadata({ params }: Props) {
 
   return pageMetadata({
     title: `${development.title} — ${pick(settings, "site_name", "Quadrant Properties")}`,
-    description:
-      development.short_description ??
+    description: fitDescription(
+      development.short_description,
       `Discover ${development.title} in ${development.community_name ?? "Dubai"}. ${pick(settings, "site_name") ?? ""} — Off-Plan Real Estate Advisory.`,
+    ),
     path: `/buy/${slug}`,
     ogImage: siteUrl(publicPath(development.main_image)),
   });
 }
 
-/** Carbon::parse($date)->format('Q\Q Y') — "Q" is not a PHP date token, so this prints "QQ 2028". */
+/** "2028-09-30" → "Q3 2028" (the Laravel page printed a literal "QQ 2028"). */
 function handoverQuarter(date: string): string {
-  const m = /^(\d{4})/.exec(date);
-  const y = m ? m[1] : String(new Date(date).getFullYear());
-  return `QQ ${y}`;
+  const m = /^(\d{4})-(\d{2})/.exec(date);
+  if (m) return `Q${Math.ceil(Number(m[2]) / 3)} ${m[1]}`;
+  const d = new Date(date);
+  return `Q${Math.floor(d.getMonth() / 3) + 1} ${d.getFullYear()}`;
 }
 
 /** preg_match('/(\d+%)/') + str_replace — "20% On Booking" → ["On Booking", "20%"] */
@@ -282,6 +284,8 @@ export default async function DevelopmentShow({ params }: Props) {
                   frameBorder="0"
                   style={{ border: 0, borderRadius: 4, display: "block" }}
                   src={`https://www.google.com/maps?q=${development.community_latitude},${development.community_longitude}&hl=en&z=14&output=embed`}
+                  title={`${development.title} location map`}
+                  loading="lazy"
                   allowFullScreen
                 />
               ) : (

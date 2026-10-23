@@ -155,7 +155,7 @@ export default function AboutPage() {
       {/* SECTION 7 — GIVING (key feature band — given real visual weight, not a footnote) */}
       <section className="qp-offmarket" style={{ minHeight: 380 }}>
         <img
-          src="/public/assets/images/quadrant-giving.png"
+          src="/public/assets/images/quadrant-giving.webp"
           alt="Building homes worldwide"
           style={{ filter: "brightness(0.4)" }}
         />
@@ -213,7 +213,7 @@ export default function AboutPage() {
               <img
                 loading="lazy"
                 decoding="async"
-                src="/public/assets/images/Faisal_dp.png"
+                src="/public/assets/images/Faisal_dp.webp"
                 alt="Faisal Farooqui - Founder & CEO of Quadrant Properties"
               />
             </div>

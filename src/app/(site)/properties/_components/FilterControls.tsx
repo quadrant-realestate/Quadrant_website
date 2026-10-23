@@ -23,6 +23,7 @@ export function FilterTrigger() {
   return (
     <a
       href="#"
+      role="button"
       onClick={(e) => {
         e.preventDefault();
         openNav();
@@ -39,6 +40,7 @@ export function FilterClose() {
   return (
     <a
       href="#"
+      role="button"
       className="closebtn"
       onClick={(e) => {
         e.preventDefault();

@@ -20,6 +20,7 @@ export function FilterOpenLink({ className, children }: { className?: string; ch
   return (
     <a
       href="#"
+      role="button"
       className={className}
       onClick={(e) => {
         e.preventDefault();
@@ -35,6 +36,7 @@ export function FilterCloseLink() {
   return (
     <a
       href="#"
+      role="button"
       className="closebtn"
       onClick={(e) => {
         e.preventDefault();

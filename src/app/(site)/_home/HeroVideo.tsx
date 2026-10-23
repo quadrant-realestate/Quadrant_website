@@ -29,7 +29,7 @@ export function HeroVideo() {
       poster="/public/assets/images/quadrant-hero-dubai.jpg"
       style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }}
     >
-      <source src="/public/assets/video/home-video-3.mp4" type="video/mp4" />
+      <source src="/public/assets/video/home-video-web.mp4" type="video/mp4" />
       {/* Fallback image if browser doesn't support video */}
       <img src="/public/assets/images/quadrant-hero-dubai.jpg" alt="Dubai skyline" />
     </video>

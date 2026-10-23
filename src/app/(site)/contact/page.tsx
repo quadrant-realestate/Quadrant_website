@@ -1,3 +1,4 @@
+import { GOOGLE_REVIEW_URL } from "@/components/site/Footer";
 import Link from "@/components/site/Link";
 import { pageMetadata } from "@/lib/seo";
 import { getSettings, pick } from "@/lib/settings";
@@ -17,6 +18,8 @@ export async function generateMetadata() {
     path: "/contact",
   });
 }
+
+const MAP_QUERY = encodeURIComponent("Concord Tower, Dubai Media City, Dubai");
 
 const social: React.CSSProperties = { color: "#C8A965", fontSize: 20 };
 
@@ -131,6 +134,23 @@ export default async function ContactPage() {
 
             <div className="qp-cont-divider"></div>
 
+            {/* Google Review */}
+            <div className="qp-cont-item">
+              <span className="qp-cont-label">Worked With Us?</span>
+              <a href={GOOGLE_REVIEW_URL} target="_blank">
+                Leave us a Google review
+              </a>
+              <img
+                src="/google-review-qr.svg"
+                alt="QR code for our Google review page"
+                width={110}
+                height={110}
+                style={{ display: "block", marginTop: 10 }}
+              />
+            </div>
+
+            <div className="qp-cont-divider"></div>
+
             {/* Social Links */}
             <div className="qp-cont-item">
               <span className="qp-cont-label">Follow Us</span>
@@ -171,13 +191,30 @@ export default async function ContactPage() {
       {mapsEmbed ? (
         <section dangerouslySetInnerHTML={{ __html: mapsEmbed }} />
       ) : (
-        <section style={{ background: "#F4F5F7", padding: "32px 20px", textAlign: "center" }}>
-          <p style={{ color: "#8a93a3", fontSize: 13, margin: 0 }}>
-            Office 805, Concord Tower, Dubai Media City, Dubai —{" "}
-            <a href="https://maps.google.com/?q=Concord+Tower+Dubai+Media+City" target="_blank" style={{ color: "#C8A965" }}>
-              View on Google Maps
-            </a>
-          </p>
+        <section className="qp-map-sec">
+          <div className="container">
+            <h3>Visit Our Office</h3>
+            <div className="qp-map-frame">
+              <iframe
+                src={`https://www.google.com/maps?q=${MAP_QUERY}&output=embed`}
+                title="Quadrant Properties office on Google Maps"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+              <div className="qp-map-card">
+                <span className="qp-cont-label">Our Office</span>
+                <p>{officeAddress ?? "Office 805, Concord Tower, Dubai Media City, Dubai"}</p>
+                <a
+                  className="qp-map-btn"
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${MAP_QUERY}`}
+                  target="_blank"
+                >
+                  <i className="fa-solid fa-location-arrow" /> Get Directions
+                </a>
+              </div>
+            </div>
+          </div>
         </section>
       )}
     </>
