@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { submitInquiry, type FormState } from "@/actions/inquiries";
+import { useTrackLead } from "@/components/site/MetaPixel";
 import { SpamTrap } from "@/components/site/SpamTrap";
 
 /** "Register Your Interest" sidebar form (posts to inquiry.submit in the old site). */
@@ -15,6 +16,7 @@ export function InterestForm({
   defaultNotes: string;
 }) {
   const [state, action] = useActionState<FormState, FormData>(submitInquiry, {});
+  useTrackLead(state, "property_detail");
   // The Blade view didn't show validation errors or old input; keep what was typed after a failed submit.
   const v = state.values ?? {};
 

@@ -2,11 +2,13 @@
 
 import { useActionState } from "react";
 import { submitInquiry, type FormState } from "@/actions/inquiries";
+import { useTrackLead } from "@/components/site/MetaPixel";
 import { SpamTrap } from "@/components/site/SpamTrap";
 
 /** 9. Register-interest form (posted to inquiry.submit in Laravel). */
 export function InterestForm({ developmentId, title, ts }: { developmentId: number; title: string; ts: string }) {
   const [state, action] = useActionState<FormState, FormData>(submitInquiry, {});
+  useTrackLead(state, "project_detail");
   const v = state.values ?? {};
 
   return (

@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { submitContact, type FormState } from "@/actions/inquiries";
+import { useTrackLead } from "@/components/site/MetaPixel";
 import { SpamTrap } from "@/components/site/SpamTrap";
 
 const INTERESTS: [value: string, label: string][] = [
@@ -15,6 +16,7 @@ const INTERESTS: [value: string, label: string][] = [
 /** Enquiry form on the contact page (posts to submitContact, Laravel's contact.submit). */
 export function ContactForm({ ts }: { ts: string }) {
   const [state, action] = useActionState<FormState, FormData>(submitContact, {});
+  useTrackLead(state, "contact_page");
   // old('field') — previous input after a validation error
   const old = (key: string) => state.values?.[key] ?? "";
   const hasErrors = !!state.errors && Object.keys(state.errors).length > 0;

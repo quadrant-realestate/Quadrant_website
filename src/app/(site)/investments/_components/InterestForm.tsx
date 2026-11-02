@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { submitInquiry, type FormState } from "@/actions/inquiries";
+import { useTrackLead } from "@/components/site/MetaPixel";
 import { SpamTrap } from "@/components/site/SpamTrap";
 
 /**
@@ -10,6 +11,7 @@ import { SpamTrap } from "@/components/site/SpamTrap";
  */
 export function InterestForm({ ts, source, notes }: { ts: string; source: string; notes?: string }) {
   const [state, formAction] = useActionState<FormState, FormData>(submitInquiry, {});
+  useTrackLead(state, source);
   const v = state.values ?? {};
 
   return (

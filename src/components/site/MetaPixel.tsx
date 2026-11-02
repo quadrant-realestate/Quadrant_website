@@ -12,6 +12,17 @@ declare global {
   }
 }
 
+/** Sends a Meta Pixel Lead event once for each successful submission of an enquiry form. */
+export function useTrackLead(state: { success?: string }, formName: string) {
+  const tracked = useRef<object | null>(null);
+
+  useEffect(() => {
+    if (!state.success || tracked.current === state) return;
+    tracked.current = state;
+    window.fbq?.("track", "Lead", { content_name: formName });
+  }, [state, formName]);
+}
+
 /** Meta Pixel: the base code tracks the first PageView; client-side navigations are tracked here. */
 export function MetaPixel() {
   const pathname = usePathname();
