@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { JsonLd } from "@/components/site/JsonLd";
+import { MetaPixel } from "@/components/site/MetaPixel";
 import { getSettings, pick } from "@/lib/settings";
 import { asset, siteUrl } from "@/lib/url";
 import "./site.css";
@@ -72,6 +73,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
         <Header siteName={s("site_name", "Quadrant Properties")} />
         {children}
         <Footer settings={settings} />
+        <MetaPixel />
       </body>
     </html>
   );
