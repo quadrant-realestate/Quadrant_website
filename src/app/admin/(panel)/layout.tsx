@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Quadrant - Dashboard",
-  icons: { icon: "/public/favicon.png" },
+  icons: { icon: "/favicon.ico" },
   robots: { index: false, follow: false },
 };
 

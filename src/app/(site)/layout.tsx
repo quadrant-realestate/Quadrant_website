@@ -9,7 +9,15 @@ import "./site.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
-  icons: { icon: "/public/favicon.png" },
+  // Navy square with a white Q, so it shows on both light and dark browser tabs.
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
+  },
 };
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1 };
