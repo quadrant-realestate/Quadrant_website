@@ -112,7 +112,8 @@ h5 {
 }
 .qp-fc-text { display: flex; flex-direction: column; line-height: 1.25; margin-right: 6px; min-width: 0; }
 .qp-fc-text strong { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 600; color: #11203A; }
-.qp-fc-text span { font-size: 12px; color: #8a93a3; white-space: nowrap; }
+.qp-fc-text a { font-size: 13px; font-weight: 600; color: #11203A; white-space: nowrap; text-decoration: none; }
+.qp-fc-text a:hover { color: #c8a965; }
 .qp-fc-wa {
   display: inline-flex;
   align-items: center;
@@ -143,6 +144,31 @@ h5 {
   transition: border-color .2s ease, color .2s ease;
 }
 .qp-fc-call:hover { border-color: #C8A965; color: #C8A965 !important; }
+.qp-fc-call { position: relative; }
+/* Number bubble above the call button, shown on hover; clicking anywhere on the button still calls. */
+.qp-fc-number {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 14px;
+  background: #11203A;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(17, 32, 58, .25);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease, visibility .2s ease;
+}
+.qp-fc-number small { font-size: 11px; font-weight: 400; color: #C8A965; }
+.qp-fc-call:hover .qp-fc-number,
+.qp-fc-call:focus-visible .qp-fc-number { opacity: 1; visibility: visible; }
 .qp-fc-hide {
   background: none;
   border: none;
@@ -170,7 +196,8 @@ h5 {
   .qp-fc { right: 16px; left: 16px; bottom: 12px; gap: 8px; max-width: none; }
   .qp-fc-avatar { width: 42px; height: 42px; }
   .qp-fc-text strong { font-size: 16px; }
-  .qp-fc-text span { display: none; }
+  .qp-fc-text a { font-size: 12px; }
+  .qp-fc-number { display: none; }
   .qp-fc-text { flex: 1; }
   .qp-fc-wa { padding: 10px 14px; font-size: 14px; }
   .qp-fc-call { width: 40px; height: 40px; }
