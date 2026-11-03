@@ -1,7 +1,7 @@
 import { getSettings, pick } from "@/lib/settings";
 import type { SearchParams } from "@/lib/queries/properties";
 import { ListingPage, type ListingConfig } from "../_components/ListingPage";
-import { RENT_ALTS, RENT_CTA_TEXT, RENT_DESCRIPTION, listingMetadata, loadListing } from "../_components/listing-data";
+import { RENT_ALTS, RENT_CTA_TEXT, listingMetadata, loadListing } from "../_components/listing-data";
 
 // website/properties/private.blade.php — PropertyFrontController@private
 
@@ -12,7 +12,7 @@ const PATH = "/properties/private-office";
 export async function generateMetadata({ searchParams }: Props) {
   return listingMetadata("private", await searchParams, PATH, ({ withDefault, raw }) => ({
     title: `Private Office — ${raw}`,
-    description: RENT_DESCRIPTION(withDefault),
+    description: `Private Office by ${withDefault}: discreet, off-market Dubai properties for private clients, family offices and high-net-worth investors.`,
   }));
 }
 

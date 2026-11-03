@@ -4,7 +4,13 @@ import { pageMetadata } from "@/lib/seo";
 export const revalidate = 60;
 
 export async function generateMetadata() {
-  return pageMetadata({ title: "Cookies Policy — Quadrant Properties", path: "/cookie-policy" });
+  // noindex until the real policy replaces "Coming Soon"
+  return pageMetadata({
+    title: "Cookies Policy — Quadrant Properties",
+    description: "How the Quadrant Properties website uses cookies and similar tools, including Google Analytics and the Meta Pixel, and how to control them.",
+    path: "/cookie-policy",
+    noindex: true,
+  });
 }
 
 export default function CookiePolicyPage() {

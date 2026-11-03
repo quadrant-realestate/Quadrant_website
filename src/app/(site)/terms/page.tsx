@@ -4,7 +4,13 @@ import { pageMetadata } from "@/lib/seo";
 export const revalidate = 60;
 
 export async function generateMetadata() {
-  return pageMetadata({ title: "Terms — Quadrant Properties", path: "/terms" });
+  // noindex until the real terms replace "Coming Soon"
+  return pageMetadata({
+    title: "Terms — Quadrant Properties",
+    description: "The terms of use for the Quadrant Properties website, including listing information, enquiries and intellectual property.",
+    path: "/terms",
+    noindex: true,
+  });
 }
 
 export default function TermsPage() {

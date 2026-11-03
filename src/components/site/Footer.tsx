@@ -179,8 +179,8 @@ export function Footer({ settings }: { settings: Settings }) {
         <div style={{ borderTop: "1px solid #C8A965", marginTop: 30, padding: "20px 0" }}>
           <div className="container">
             <p style={{ fontSize: 11, color: "#5B6678", margin: 0, textAlign: "center" }}>
-              © {new Date().getFullYear()} Quadrant Properties. All rights reserved. | ORN:{" "}
-              {s("rera_number", "[Office Registration Number]")} | RERA Permit displayed per listing. |{" "}
+              © {new Date().getFullYear()} Quadrant Properties. All rights reserved. |{" "}
+              {s("rera_number") && <>ORN: {s("rera_number")} | </>}
               <Link href="/privacy-policy" style={{ fontSize: 11, color: "#5B6678" }}>
                 Privacy Policy
               </Link>
@@ -195,7 +195,7 @@ export function Footer({ settings }: { settings: Settings }) {
 
       <FloatingContact
         whatsapp={digits(s("whatsapp_number", "971524233010"))}
-        phone="+971 50 268 3010"
+        phone={phone ?? "+971 50 268 3010"}
       />
     </>
   );

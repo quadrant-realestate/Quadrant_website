@@ -4,7 +4,13 @@ import { pageMetadata } from "@/lib/seo";
 export const revalidate = 60;
 
 export async function generateMetadata() {
-  return pageMetadata({ title: "Privacy Policy — Quadrant Properties", path: "/privacy-policy" });
+  // noindex until the real policy replaces "Coming Soon"
+  return pageMetadata({
+    title: "Privacy Policy — Quadrant Properties",
+    description: "How Quadrant Properties collects, uses and protects the personal information you share through our website and enquiry forms.",
+    path: "/privacy-policy",
+    noindex: true,
+  });
 }
 
 export default function PrivacyPolicyPage() {

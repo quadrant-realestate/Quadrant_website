@@ -1,7 +1,7 @@
 import { getSettings, pick } from "@/lib/settings";
 import type { SearchParams } from "@/lib/queries/properties";
 import { ListingPage, type ListingConfig } from "../_components/ListingPage";
-import { RENT_ALTS, RENT_CTA_TEXT, RENT_DESCRIPTION, listingMetadata, loadListing } from "../_components/listing-data";
+import { RENT_ALTS, RENT_CTA_TEXT, listingMetadata, loadListing } from "../_components/listing-data";
 
 // website/properties/international.blade.php — PropertyFrontController@international
 
@@ -12,7 +12,7 @@ const PATH = "/properties/international";
 export async function generateMetadata({ searchParams }: Props) {
   return listingMetadata("international", await searchParams, PATH, ({ withDefault, raw }) => ({
     title: `International Properties — ${raw}`,
-    description: RENT_DESCRIPTION(withDefault),
+    description: `International properties curated by ${withDefault}: hand-picked homes and investments abroad, with advice from our Dubai team.`,
   }));
 }
 

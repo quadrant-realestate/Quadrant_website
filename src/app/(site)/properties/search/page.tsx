@@ -1,7 +1,7 @@
 import { getSettings, pick } from "@/lib/settings";
 import { param, type SearchParams } from "@/lib/queries/properties";
 import { ListingPage, type ListingConfig } from "../_components/ListingPage";
-import { RENT_ALTS, RENT_CTA_TEXT, RENT_DESCRIPTION, listingMetadata, loadListing } from "../_components/listing-data";
+import { RENT_ALTS, RENT_CTA_TEXT, listingMetadata, loadListing } from "../_components/listing-data";
 import { strFilled } from "../_components/php";
 
 // website/properties/search.blade.php — PropertyFrontController@search
@@ -21,7 +21,7 @@ export async function generateMetadata({ searchParams }: Props) {
   const sp = await searchParams;
   return listingMetadata(listingTypeOf(sp), sp, PATH, ({ withDefault, raw }) => ({
     title: `Search Results — ${raw}`,
-    description: RENT_DESCRIPTION(withDefault),
+    description: `Search Dubai properties with ${withDefault}. Filter homes for sale and rent by area, type, bedrooms and budget.`,
   }));
 }
 
