@@ -59,7 +59,7 @@ const FAQS: [question: string, answer: string][] = [
   ],
   [
     "When do I get paid?",
-    "You get paid once the deal is complete and Quadrant has received its commission. Our live tracker will notify you as soon as your commission is ready.",
+    "You get paid once the deal is complete and Quadrant Properties has received its commission. Our live tracker will notify you as soon as your commission is ready.",
   ],
   [
     "Do I need to manage the sale myself?",
