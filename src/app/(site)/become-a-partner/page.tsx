@@ -59,7 +59,7 @@ const FAQS: [question: string, answer: string][] = [
   ],
   [
     "When do I get paid?",
-    "Commission is paid after the deal completes and Quadrant has received its own commission. You get a live tracker to follow your deal, and you are notified as soon as Quadrant is paid so you can collect your commission. The timing is set out in your partner agreement.",
+    "You get paid once the deal is complete and Quadrant has received its commission. You can follow your deal on a live tracker, and we will notify you when your commission is ready.",
   ],
   [
     "Do I need to manage the sale myself?",
