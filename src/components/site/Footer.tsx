@@ -195,7 +195,7 @@ export function Footer({ settings }: { settings: Settings }) {
       </footer>
 
       <FloatingContact
-        whatsapp={digits(s("whatsapp_number", "971524233010"))}
+        whatsapp={digits(s("whatsapp_number", "971509195194"))}
         phone={phone ?? "+971 50 268 3010"}
       />
     </>

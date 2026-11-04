@@ -114,8 +114,8 @@ export default async function ContactPage() {
                   {whatsapp}
                 </a>
               ) : (
-                <a href="https://wa.me/971524233010" target="_blank">
-                  +971524233010
+                <a href="https://wa.me/971509195194" target="_blank">
+                  +971 50 919 5194
                 </a>
               )}
             </div>
