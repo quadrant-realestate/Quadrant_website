@@ -17,7 +17,7 @@ type InquiryForEmail = {
 };
 
 function recipients(): string[] {
-  return (process.env.INQUIRY_NOTIFY_EMAILS ?? "quadrantpropertiesai@gmail.com")
+  return (process.env.INQUIRY_NOTIFY_EMAILS ?? "quadrantpropertiesai@gmail.com,Nabeel@quadrant.ae")
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean);
