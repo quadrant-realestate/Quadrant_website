@@ -19,6 +19,7 @@ export type FormState = {
 
 const CONTACT_SUCCESS = "Thank you for contacting us. One of our advisors will get in touch with you shortly.";
 const INQUIRY_SUCCESS = "Thank you! We will be in touch shortly.";
+const PARTNER_SUCCESS = "Thank you for applying. Our team will review your details and be in touch.";
 
 async function clientIp(): Promise<string | null> {
   const h = await headers();
@@ -140,4 +141,54 @@ export async function submitInquiry(_prev: FormState, form: FormData): Promise<F
   // Send the email after the response, so a slow mail server never delays the visitor.
   after(() => notifyInquiry(id));
   return { success: INQUIRY_SUCCESS };
+}
+
+// ============================================================
+// PARTNER APPLICATION FORM (become-a-partner page)
+// ============================================================
+const partnerSchema = z.object({
+  name: required("name", 150),
+  email,
+  phone: required("phone", 30),
+  partner_type: z.enum(["Individual", "Licensed agent", "Agency"], {
+    error: "The selected partner type is invalid.",
+  }),
+});
+
+export async function submitPartner(_prev: FormState, form: FormData): Promise<FormState> {
+  const reason = spamReason(form, form.get("notes") as string | null);
+  if (reason) {
+    console.info(`Blocked spam inquiry: ${reason}`, { email: form.get("email") });
+    return { success: PARTNER_SUCCESS };
+  }
+
+  const parsed = partnerSchema.safeParse(Object.fromEntries(form));
+  if (!parsed.success) return { errors: fieldErrors(parsed.error), values: values(form) };
+
+  const d = parsed.data;
+  const company = optionalText(form.get("company"), 150);
+  const heardFrom = optionalText(form.get("heard_from"), 100);
+  const notes = optionalText(form.get("notes"), 5000);
+  const id = await insert("inquiries", {
+    name: d.name,
+    email: d.email,
+    phone: d.phone,
+    // The inquiries table has no partner columns, so the extra answers go in the message.
+    message: [
+      `Partner type: ${d.partner_type}`,
+      company && `Company: ${company}`,
+      heardFrom && `Heard about us: ${heardFrom}`,
+      notes,
+    ]
+      .filter(Boolean)
+      .join("\n"),
+    inquiry_type: "partner",
+    status: "new",
+    source: "partner_page",
+    ip_address: await clientIp(),
+  });
+
+  // Send the email after the response, so a slow mail server never delays the visitor.
+  after(() => notifyInquiry(id));
+  return { success: PARTNER_SUCCESS };
 }

@@ -43,6 +43,7 @@ export async function GET() {
     ["about", "/about", "0.7"],
     ["services", "/services", "0.7"],
     ["giving", "/giving", "0.5"],
+    ["become-a-partner", "/become-a-partner", "0.6"],
     ["contact", "/contact", "0.6"],
     ["privacy", "/privacy-policy", "0.2"],
     ["terms", "/terms", "0.2"],

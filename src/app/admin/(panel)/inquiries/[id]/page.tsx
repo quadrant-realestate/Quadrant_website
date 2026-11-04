@@ -12,6 +12,7 @@ const TYPE_COLORS: Record<string, string> = {
   property: "bg-primary-subtle text-primary",
   general: "bg-secondary-subtle text-secondary",
   valuation: "bg-info-subtle text-info",
+  partner: "bg-success-subtle text-success",
 };
 const STATUS_COLORS: Record<string, string> = {
   new: "bg-danger-subtle text-danger",

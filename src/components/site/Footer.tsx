@@ -21,6 +21,7 @@ const EXPLORE: [href: string, label: string][] = [
   ["/services", "Services"],
   ["/about", "About"],
   ["/blogs", "Blogs"],
+  ["/become-a-partner", "Become a Partner"],
   ["/contact", "Contact"],
 ];
 

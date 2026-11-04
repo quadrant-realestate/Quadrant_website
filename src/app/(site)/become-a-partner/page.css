@@ -1,0 +1,64 @@
+    /* ============================================================
+       BECOME A PARTNER PAGE — builds on the sell page styles
+    ============================================================ */
+
+    .qp-partner-grid { margin-top: 0; }
+    .qp-partner-grid-two {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 820px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .qp-sell-why-card .qp-icon i { color: #C8A965; font-size: 19px; }
+    .qp-sell-steps .qp-sell-why-card { border: 1px solid #e3e8ef; border-top-width: 3px; }
+
+    /* How It Works */
+    .qp-partner-steps { background: #F4F5F7; }
+    .qp-partner-steps .qp-steps-grid { grid-template-columns: repeat(3, 1fr); }
+
+    /* Common Questions */
+    .qp-partner-faq { max-width: 760px; margin: 0 auto; }
+    .qp-partner-faq details { border-bottom: 1px solid #e3e8ef; }
+    .qp-partner-faq summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 18px 0;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 19px;
+        color: #11203A;
+        cursor: pointer;
+        list-style: none;
+    }
+    .qp-partner-faq summary::-webkit-details-marker { display: none; }
+    .qp-partner-faq summary::after {
+        content: '+';
+        font-family: 'Inter', sans-serif;
+        font-size: 20px;
+        color: #C8A965;
+    }
+    .qp-partner-faq details[open] summary::after { content: '\2212'; }
+    .qp-partner-faq p {
+        font-size: 14px;
+        color: #5B6678;
+        line-height: 1.7;
+        margin: 0 0 18px;
+    }
+
+    /* Application form */
+    #apply { scroll-margin-top: 80px; }
+    .qp-partner-success {
+        background: #f0faf5;
+        border: 1px solid #b2dfc9;
+        border-radius: 4px;
+        padding: 14px 18px;
+        font-size: 14px;
+        color: #1B2538;
+        margin-bottom: 20px;
+    }
+
+    @media (max-width: 991px) {
+        .qp-partner-grid-two,
+        .qp-partner-steps .qp-steps-grid { grid-template-columns: 1fr; }
+    }

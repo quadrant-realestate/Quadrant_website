@@ -9,6 +9,7 @@ const TYPE_COLORS: Record<string, string> = {
   property: "bg-primary-subtle text-primary",
   general: "bg-secondary-subtle text-secondary",
   valuation: "bg-info-subtle text-info",
+  partner: "bg-success-subtle text-success",
 };
 const STATUS_COLORS: Record<string, string> = {
   new: "bg-danger-subtle text-danger",
@@ -132,6 +133,7 @@ export default async function InquiriesPage({ searchParams }: { searchParams: Pr
                         <option value="property">Property</option>
                         <option value="general">General</option>
                         <option value="valuation">Valuation</option>
+                        <option value="partner">Partner</option>
                       </select>
                     </div>
 

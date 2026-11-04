@@ -56,7 +56,7 @@ export async function notifyInquiry(id: number): Promise<void> {
       from: { name: process.env.MAIL_FROM_NAME ?? "Quadrant Properties", address: process.env.MAIL_FROM_ADDRESS ?? "" },
       to,
       replyTo: { name: inquiry.name, address: inquiry.email },
-      subject: `New website inquiry: ${inquiry.name}`,
+      subject: `${inquiry.inquiry_type === "partner" ? "New partner application" : "New website inquiry"}: ${inquiry.name}`,
       html: inquiryEmailHtml(inquiry),
     });
   } catch (error) {

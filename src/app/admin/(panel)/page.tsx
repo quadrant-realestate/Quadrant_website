@@ -37,6 +37,7 @@ const INQUIRY_TYPE_COLORS: Record<string, string> = {
   sell: "bg-warning-subtle text-warning",
   valuation: "bg-primary-subtle text-primary",
   callback: "bg-danger-subtle text-danger",
+  partner: "bg-success-subtle text-success",
 };
 const INQUIRY_STATUS_COLORS: Record<string, string> = {
   new: "bg-danger-subtle text-danger",
