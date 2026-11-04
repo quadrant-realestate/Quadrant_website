@@ -92,7 +92,7 @@ export default async function ContactPage() {
               {contactPhone ? (
                 <a href={`tel:${contactPhone}`}>{contactPhone}</a>
               ) : (
-                <a href="tel:+971524233010">+971524233010</a>
+                <a href="tel:+971527682266">+971 52 768 2266</a>
               )}
             </div>
 
