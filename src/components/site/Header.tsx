@@ -11,6 +11,7 @@ const NAV = [
   { href: "/services", label: "Services", match: ["/services"] },
   { href: "/about", label: "About", match: ["/about"] },
   { href: "/blogs", label: "Blogs", match: ["/blogs"] },
+  { href: "/become-a-partner", label: "Become a Partner", match: ["/become-a-partner"] },
   { href: "/contact", label: "Contact", match: ["/contact"] },
 ];
 
