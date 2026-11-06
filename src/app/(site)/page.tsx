@@ -12,6 +12,7 @@ import { sanityImage } from "@/lib/sanity";
 import { pageMetadata } from "@/lib/seo";
 import { setting } from "@/lib/settings";
 import { asset } from "@/lib/url";
+import { CurrentProjectsToast } from "./_home/CurrentProjectsToast";
 import { FallbackImg } from "./_home/FallbackImg";
 import { HeroVideo } from "./_home/HeroVideo";
 import "./_home/home.css";
@@ -74,6 +75,7 @@ export default async function HomePage() {
   return (
     <>
       <BodyClass name="qp-home-page" />
+      {currentProjects.length > 0 && <CurrentProjectsToast count={currentProjects.length} />}
       <div className="qp-home">
         {/* SECTION 1 — HERO (no search widget — brief: headline, sub-line, two buttons only) */}
         <section className="qp-hero">

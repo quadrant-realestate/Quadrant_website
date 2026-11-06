@@ -170,3 +170,51 @@
         .qp-current-1 .qp-listing-body { padding: 16px 18px 20px; }
         .qp-current-1 .qp-listing-body h4 { font-size: 20px; }
     }
+
+    /* Current projects notification: shows on the first home page load of a visit, hides after 4s */
+    .qp-toast {
+        position: fixed;
+        top: 112px;
+        right: 24px;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        max-width: 340px;
+        padding: 12px 10px 12px 12px;
+        background: #FBFAF6;
+        border: 1px solid #e6e1d4;
+        border-left: 3px solid #C8A965;
+        box-shadow: 0 8px 24px rgba(17, 32, 58, .2);
+        animation: qp-toast 4s ease forwards;
+    }
+    .qp-toast-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #11203A;
+        color: #C8A965;
+        font-size: 16px;
+    }
+    .qp-toast-text { display: block; color: #11203A; font-size: 13px; line-height: 1.4; text-decoration: none; }
+    .qp-toast-text strong { display: block; font-size: 15px; }
+    .qp-toast-close { padding: 4px 6px; border: none; background: none; color: #11203A; font-size: 14px; cursor: pointer; }
+    @keyframes qp-toast {
+        0% { opacity: 0; transform: translateX(24px); }
+        8%, 92% { opacity: 1; transform: none; }
+        100% { opacity: 0; transform: translateX(24px); }
+    }
+    @keyframes qp-toast-fade {
+        0%, 100% { opacity: 0; }
+        8%, 92% { opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .qp-toast { animation-name: qp-toast-fade; }
+    }
+    @media (max-width: 575px) {
+        .qp-toast { top: 84px; right: 16px; left: 16px; max-width: none; }
+    }
