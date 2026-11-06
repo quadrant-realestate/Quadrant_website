@@ -1,6 +1,8 @@
 import Link from "@/components/site/Link";
 import { Pagination } from "@/components/site/Pagination";
+import { ProjectStatusBadge } from "@/components/site/ProjectStatusBadge";
 import { numberFormat } from "@/lib/format";
+import { getCurrentProjects } from "@/lib/queries/current-projects";
 import {
   getDevelopmentsPage,
   getFilterCommunities,
@@ -8,6 +10,7 @@ import {
   getHandoverYears,
   type DevelopmentFilters,
 } from "@/lib/queries/developments";
+import { sanityImage } from "@/lib/sanity";
 import { pageMetadata } from "@/lib/seo";
 import { getSettings, pick } from "@/lib/settings";
 import { asset } from "@/lib/url";
@@ -55,15 +58,21 @@ export default async function DevelopmentsIndex({ searchParams }: Props) {
   const req = requestInput(await searchParams);
   const filters: DevelopmentFilters = req;
 
-  const [developments, communities, developers, handoverYears] = await Promise.all([
+  const [developments, communities, developers, handoverYears, currentProjects] = await Promise.all([
     getDevelopmentsPage(filters, pageNumber(req.page)),
     getFilterCommunities(),
     getFilterDevelopers(),
     getHandoverYears(),
+    getCurrentProjects(),
   ]);
 
   const sortHidden = Object.entries(req).filter(([key]) => key !== "sort" && key !== "page");
   const anyFilled = FILTER_KEYS.some((key) => req[key] !== undefined);
+  // Filtered results and later pages go straight to the matching projects.
+  const showCurrentProjects = currentProjects.length > 0 && !anyFilled && developments.currentPage === 1;
+  // One or two projects get bigger cards, so the row is always full (see .qp-current-* in page.css).
+  const currentColumns = Math.min(currentProjects.length, 3);
+  const [currentImageWidth, currentImageHeight] = currentColumns === 1 ? [1200, 800] : [760, 420];
 
   return (
     <>
@@ -100,6 +109,50 @@ export default async function DevelopmentsIndex({ searchParams }: Props) {
 
       <section style={{ padding: "0 0 60px" }}>
         <div className="container">
+          {/* CURRENT PROJECTS (from Sanity) */}
+          {showCurrentProjects && (
+            <div className="qp-current-projects" id="current-projects">
+              <h2 className="qp-section-title">Current Projects</h2>
+              <p className="qp-section-sub">What our team is working on right now.</p>
+
+              <div className={`qp-projects-grid qp-current-${currentColumns}`}>
+                {currentProjects.map((project) => (
+                  <div className="qp-project-card" key={project._id}>
+                    <div className="qp-project-img">
+                      <ProjectStatusBadge status={project.status} />
+                      <img
+                        src={sanityImage(project.image, currentImageWidth, currentImageHeight) ?? PLACEHOLDER}
+                        alt={project.imageAlt ?? project.title}
+                      />
+                    </div>
+
+                    <div className="qp-project-body">
+                      <h3>{project.title}</h3>
+
+                      {project.developer && <p className="qp-project-developer">{project.developer}</p>}
+                      {project.community && <p className="qp-project-loc">{project.community}</p>}
+                      {project.statusNote && <p className="qp-project-note">{project.statusNote}</p>}
+                      {project.priceFrom ? (
+                        <p className="qp-project-price">From AED {numberFormat(project.priceFrom)}</p>
+                      ) : null}
+
+                      <div className="qp-project-facts">
+                        {project.bedroomRange && <span>{project.bedroomRange}</span>}
+                        {project.handover && <span>&middot; Handover {project.handover}</span>}
+                      </div>
+
+                      <Link href="/contact" className="qp-view-btn">
+                        Speak with an Advisor
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {showCurrentProjects && <h2 className="qp-section-title">All Off-Plan Projects</h2>}
+
           <FilterProvider initialOpen={anyFilled}>
             {/* TOOLBAR: count, sort, filter toggle */}
             <div className="qp-toolbar">

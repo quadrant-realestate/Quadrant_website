@@ -249,3 +249,27 @@ h5 {
     bottom: 5px;
   }
 }
+
+/* Current project status badge (home page and Buy page) */
+.qp-progress-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #11203A;
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 2px;
+  font-weight: 700;
+}
+.qp-progress-badge svg { width: 13px; height: 13px; stroke: #C8A965; flex-shrink: 0; }
+.qp-progress-badge--processing svg { animation: qp-progress-spin 2.4s linear infinite; }
+@keyframes qp-progress-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .qp-progress-badge--processing svg { animation: none; }
+}

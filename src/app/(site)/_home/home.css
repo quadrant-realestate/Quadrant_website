@@ -148,3 +148,25 @@
     .qp-btn { min-width: 70%; }
     .qp-hero-btns { flex-direction: column; align-items: center; }
 }
+
+    /* Current projects: fewer projects get bigger cards, so the row is always full */
+    .qp-listings-grid.qp-current-1 { grid-template-columns: 1fr; }
+    .qp-listings-grid.qp-current-2 { grid-template-columns: repeat(2, 1fr); }
+    .qp-listings-grid.qp-current-3 { grid-template-columns: repeat(3, 1fr); }
+    .qp-current-1 .qp-listing-card { display: grid; grid-template-columns: 3fr 2fr; align-items: center; }
+    .qp-current-1 .qp-listing-img { height: 400px; }
+    .qp-current-1 .qp-listing-body { padding: 36px 40px; }
+    .qp-current-1 .qp-listing-body h4 { font-size: 28px; margin-bottom: 10px; }
+    .qp-current-1 .qp-listing-body .qp-loc { font-size: 14px; }
+    .qp-current-1 .qp-listing-body .qp-developer { font-size: 13px; margin-bottom: 18px; }
+    .qp-current-1 .qp-listing-body .qp-price { font-size: 18px; margin-bottom: 18px; }
+    .qp-current-2 .qp-listing-img { height: 280px; }
+    .qp-current-2 .qp-listing-body h4 { font-size: 20px; }
+    .qp-current-3 .qp-listing-img { height: 220px; }
+    @media (max-width: 767px) {
+        .qp-listings-grid.qp-current-2, .qp-listings-grid.qp-current-3 { grid-template-columns: 1fr; }
+        .qp-current-1 .qp-listing-card { display: block; }
+        .qp-current-1 .qp-listing-img, .qp-current-2 .qp-listing-img, .qp-current-3 .qp-listing-img { height: 220px; }
+        .qp-current-1 .qp-listing-body { padding: 16px 18px 20px; }
+        .qp-current-1 .qp-listing-body h4 { font-size: 20px; }
+    }

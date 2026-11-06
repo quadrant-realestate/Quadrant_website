@@ -224,3 +224,23 @@
     .qp-filter-grid { grid-template-columns: 1fr; }
     .qp-toolbar { flex-direction: column; align-items: stretch; }
 }
+
+/* Current projects (from Sanity), above the off-plan grid */
+.qp-current-projects { padding: 32px 0 44px; margin-bottom: 36px; border-bottom: 1px solid #eef1f5; scroll-margin-top: 110px; }
+.qp-section-title { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #11203A; font-weight: 700; margin: 0 0 6px; }
+.qp-section-sub { color: #5B6678; font-size: 14px; margin: 0 0 24px; }
+.qp-project-note { font-size: 13px; color: #5B6678; margin: 0 0 12px; }
+
+/* Fewer current projects get bigger cards, so the row is always full */
+.qp-projects-grid.qp-current-1 { grid-template-columns: 1fr; }
+.qp-projects-grid.qp-current-2 { grid-template-columns: repeat(2, 1fr); }
+.qp-current-1 .qp-project-card { display: grid; grid-template-columns: 3fr 2fr; align-items: center; }
+.qp-current-1 .qp-project-img { height: 420px; }
+.qp-current-1 .qp-project-body { padding: 32px 36px; }
+.qp-current-2 .qp-project-img { height: 280px; }
+@media (max-width: 767px) {
+    .qp-projects-grid.qp-current-2 { grid-template-columns: 1fr; }
+    .qp-current-1 .qp-project-card { display: block; }
+    .qp-current-1 .qp-project-img, .qp-current-2 .qp-project-img { height: 220px; }
+    .qp-current-1 .qp-project-body { padding: 20px 22px 22px; }
+}

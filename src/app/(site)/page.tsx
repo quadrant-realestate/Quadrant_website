@@ -1,11 +1,14 @@
 import Link from "@/components/site/Link";
 import { BodyClass } from "@/components/site/BodyClass";
+import { ProjectStatusBadge } from "@/components/site/ProjectStatusBadge";
 import { numberFormat } from "@/lib/format";
+import { getCurrentProjects, HOME_CURRENT_PROJECTS } from "@/lib/queries/current-projects";
 import {
   getFeaturedDevelopments,
   getPriorityCommunityRecords,
   PRIORITY_COMMUNITIES,
 } from "@/lib/queries/home";
+import { sanityImage } from "@/lib/sanity";
 import { pageMetadata } from "@/lib/seo";
 import { setting } from "@/lib/settings";
 import { asset } from "@/lib/url";
@@ -48,10 +51,16 @@ const why: React.CSSProperties = {
 };
 
 export default async function HomePage() {
-  const [featuredDevelopments, priorityCommunityRecords] = await Promise.all([
+  const [featuredDevelopments, priorityCommunityRecords, currentProjects] = await Promise.all([
     getFeaturedDevelopments(),
     getPriorityCommunityRecords(),
+    getCurrentProjects(),
   ]);
+
+  // Fewer projects get bigger cards, so the row is always full (see .qp-current-* in home.css).
+  const homeProjects = currentProjects.slice(0, HOME_CURRENT_PROJECTS);
+  const [currentImageWidth, currentImageHeight] =
+    homeProjects.length === 1 ? [1200, 800] : homeProjects.length === 2 ? [900, 560] : [640, 340];
 
   // Build a lookup of slug => image from any matching DB communities.
   const communityImages = new Map(priorityCommunityRecords.map((r) => [r.slug, r]));
@@ -106,6 +115,46 @@ export default async function HomePage() {
             </p>
           </div>
         </section>
+
+        {/* CURRENT PROJECTS (from Sanity; hidden until at least one is published) */}
+        {homeProjects.length > 0 && (
+          <section className="qp-section">
+            <div className="qp-container">
+              <div className="qp-listings-head">
+                <h2>Current Projects</h2>
+                <Link href="/buy#current-projects">View all projects →</Link>
+              </div>
+              <p className="qp-listings-sub">What our team is working on right now.</p>
+
+              <div className={`qp-listings-grid qp-current-${homeProjects.length}`}>
+                {homeProjects.map((project) => (
+                  <Link href="/buy#current-projects" className="qp-listing-card" key={project._id}>
+                    <div className="qp-listing-img">
+                      <ProjectStatusBadge status={project.status} />
+                      <img
+                        {...lazy()}
+                        src={sanityImage(project.image, currentImageWidth, currentImageHeight) ?? "/public/assets/img/placeholder.jpg"}
+                        alt={project.imageAlt ?? project.title}
+                      />
+                    </div>
+                    <div className="qp-listing-body">
+                      <h4>{project.title}</h4>
+                      {project.community && <p className="qp-loc">{project.community}</p>}
+                      {project.developer && <p className="qp-developer">{project.developer}</p>}
+                      {project.priceFrom ? <p className="qp-price">From AED {numberFormat(project.priceFrom)}</p> : null}
+                      {(project.bedroomRange || project.handover) && (
+                        <div className="qp-stat-row">
+                          {project.bedroomRange && <span>{project.bedroomRange}</span>}
+                          {project.handover && <span>{project.handover}</span>}
+                        </div>
+                      )}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* SECTION 3 — FEATURED OFF-PLAN PROJECTS (centrepiece, pulls from developments) */}
         <section className="qp-section">
