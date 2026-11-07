@@ -3,6 +3,7 @@ import { Pagination } from "@/components/site/Pagination";
 import { ProjectStatusBadge } from "@/components/site/ProjectStatusBadge";
 import { numberFormat } from "@/lib/format";
 import { getCurrentProjects } from "@/lib/queries/current-projects";
+import { filterOffPlanProjects, getOffPlanProjects } from "@/lib/queries/offplan-projects";
 import {
   getDevelopmentsPage,
   getFilterCommunities,
@@ -58,13 +59,28 @@ export default async function DevelopmentsIndex({ searchParams }: Props) {
   const req = requestInput(await searchParams);
   const filters: DevelopmentFilters = req;
 
-  const [developments, communities, developers, handoverYears, currentProjects] = await Promise.all([
+  const [developments, communities, dbDevelopers, dbHandoverYears, currentProjects, offPlanProjects] = await Promise.all([
     getDevelopmentsPage(filters, pageNumber(req.page)),
     getFilterCommunities(),
     getFilterDevelopers(),
     getHandoverYears(),
     getCurrentProjects(),
+    getOffPlanProjects(),
   ]);
+
+  // Projects added in Sanity are listed first, on page one only, ahead of the database projects.
+  const communityName = communities.find((c) => String(c.id) === req.community_id)?.name ?? null;
+  const sanityMatches = filterOffPlanProjects(offPlanProjects, filters, communityName);
+  const cards = developments.currentPage === 1 ? [...sanityMatches, ...developments.data] : developments.data;
+  const total = developments.total + sanityMatches.length;
+
+  const developers = [...new Set([...dbDevelopers, ...offPlanProjects.flatMap((p) => p.developer_name ?? [])])].sort();
+  const handoverYears = [
+    ...new Set([
+      ...dbHandoverYears,
+      ...offPlanProjects.flatMap((p) => (p.handover_date ? [parseInt(p.handover_date.slice(0, 4), 10)] : [])),
+    ]),
+  ].sort((a, b) => a - b);
 
   const sortHidden = Object.entries(req).filter(([key]) => key !== "sort" && key !== "page");
   const anyFilled = FILTER_KEYS.some((key) => req[key] !== undefined);
@@ -156,7 +172,7 @@ export default async function DevelopmentsIndex({ searchParams }: Props) {
           <FilterProvider initialOpen={anyFilled}>
             {/* TOOLBAR: count, sort, filter toggle */}
             <div className="qp-toolbar">
-              <p className="qp-result-count">{developments.total} projects found</p>
+              <p className="qp-result-count">{total} projects found</p>
 
               <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
                 <form method="GET" action="/buy" id="qp-sort-form">
@@ -281,8 +297,8 @@ export default async function DevelopmentsIndex({ searchParams }: Props) {
 
           {/* PROJECT CARDS GRID */}
           <div className="qp-projects-grid">
-            {developments.data.length > 0 ? (
-              developments.data.map((dev, i) => {
+            {cards.length > 0 ? (
+              cards.map((dev, i) => {
                 // Payment plan highlight — first line as the "60/40"-style highlight
                 const first = dev.payment_plan ? lines(dev.payment_plan)[0] : undefined;
                 const paymentHighlight = first && first.index === 0 ? first.line : null;
@@ -290,7 +306,7 @@ export default async function DevelopmentsIndex({ searchParams }: Props) {
                 const lazy = i >= 3 ? ({ loading: "lazy", decoding: "async" } as const) : {};
 
                 return (
-                  <div className="qp-project-card" key={dev.id}>
+                  <div className="qp-project-card" key={`${dev.id}-${dev.slug}`}>
                     <div className="qp-project-img">
                       {truthy(dev.status) && (
                         <span className="qp-status-tag">{STATUS_LABELS[dev.status] ?? "New Launch"}</span>

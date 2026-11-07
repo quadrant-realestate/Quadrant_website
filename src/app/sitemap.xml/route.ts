@@ -1,3 +1,4 @@
+import { getOffPlanProjectSlugs } from "@/lib/queries/offplan-projects";
 import { hasItems, activeSlugs } from "@/lib/queries/sitemap";
 import { sanityQuery } from "@/lib/sanity";
 import { siteUrl } from "@/lib/url";
@@ -81,6 +82,13 @@ export async function GET() {
     for (const row of rows) {
       urls.push({ loc: siteUrl(prefix + encodeSlug(row.slug)), lastmod: row.lastmod, priority });
     }
+  }
+
+  // Off-plan projects (Sanity), unless a database development already uses the slug
+  const listed = new Set(urls.map((u) => u.loc));
+  for (const project of await getOffPlanProjectSlugs()) {
+    const loc = siteUrl(`/buy/${encodeSlug(project.slug)}`);
+    if (!listed.has(loc)) urls.push({ loc, lastmod: atom(project.lastmod), priority: "0.8" });
   }
 
   // Blog posts (Sanity)

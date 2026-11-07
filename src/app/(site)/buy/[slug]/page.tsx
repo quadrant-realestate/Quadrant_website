@@ -19,12 +19,14 @@ import { HeroGallery } from "./_components/HeroGallery";
 import { InterestForm } from "./_components/InterestForm";
 import BrandedResidencePage, { generateMetadata as residenceMetadata } from "../../branded-residences/[slug]/page";
 import { getResidence } from "@/lib/queries/branded-residences";
+import { getOffPlanProjectBySlug, type OffPlanProjectPage } from "@/lib/queries/offplan-projects";
 import "./page.css";
 
 // website/developments/show.blade.php — DevelopmentFrontController@show
 //
 // When no development matches the slug, Laravel fell back to an active branded residence with
 // that slug (rendering website.branded-residences.show at this URL), otherwise 404.
+// Off-plan projects added in Sanity are checked after the database and before branded residences.
 
 export const revalidate = 60;
 
@@ -44,9 +46,29 @@ const STATUS_LABELS: Record<string, string> = {
 
 const PLACEHOLDER = "/public/assets/img/placeholder.jpg";
 
+/** A database development with its gallery, floor plans, amenities and related projects, or a Sanity project. */
+async function getProject(slug: string): Promise<OffPlanProjectPage | null> {
+  const development = await getDevelopmentBySlug(slug);
+  if (!development) return getOffPlanProjectBySlug(slug);
+
+  const [gallery, floorPlans, amenities, related] = await Promise.all([
+    getDevelopmentGallery(development.id),
+    getDevelopmentFloorPlans(development.id),
+    getDevelopmentAmenities(development.id),
+    getRelatedDevelopments(development),
+  ]);
+  return { development, gallery, floorPlans, amenities, related };
+}
+
+/** Absolute image URL for Open Graph and JSON-LD (Sanity images are already absolute). */
+function absoluteImage(path: string | null): string {
+  return path && /^https?:\/\//.test(path) ? path : siteUrl(publicPath(path));
+}
+
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
-  const [development, settings] = await Promise.all([getDevelopmentBySlug(slug), getSettings()]);
+  const [project, settings] = await Promise.all([getProject(slug), getSettings()]);
+  const development = project?.development;
   if (!development) {
     if (await getResidence(slug)) {
       const meta = await residenceMetadata({ params });
@@ -62,7 +84,7 @@ export async function generateMetadata({ params }: Props) {
       `Discover ${development.title} in ${development.community_name ?? "Dubai"}. ${pick(settings, "site_name") ?? ""} — Off-Plan Real Estate Advisory.`,
     ),
     path: `/buy/${slug}`,
-    ogImage: siteUrl(publicPath(development.main_image)),
+    ogImage: absoluteImage(development.main_image),
   });
 }
 
@@ -84,19 +106,12 @@ function paymentRow(line: string): { label: string; pct: string } {
 
 export default async function DevelopmentShow({ params }: Props) {
   const { slug } = await params;
-  const development = await getDevelopmentBySlug(slug);
-  if (!development) {
+  const [project, settings] = await Promise.all([getProject(slug), getSettings()]);
+  if (!project) {
     if (await getResidence(slug)) return <BrandedResidencePage params={params} />;
     notFound();
   }
-
-  const [gallery, floorPlans, amenities, relatedDevelopments, settings] = await Promise.all([
-    getDevelopmentGallery(development.id),
-    getDevelopmentFloorPlans(development.id),
-    getDevelopmentAmenities(development.id),
-    getRelatedDevelopments(development),
-    getSettings(),
-  ]);
+  const { development, gallery, floorPlans, amenities, related: relatedDevelopments } = project;
   const s = (key: string) => pick(settings, key);
 
   // 1. Hero images
@@ -124,7 +139,7 @@ export default async function DevelopmentShow({ params }: Props) {
     name: development.title,
     description: strLimit(stripTags(development.short_description ?? development.description), 200),
     url: siteUrl(`/buy/${slug}`),
-    image: siteUrl(publicPath(development.main_image)),
+    image: absoluteImage(development.main_image),
     address: {
       "@type": "PostalAddress",
       addressLocality: development.community_name ?? "Dubai",

@@ -18,6 +18,7 @@ export default defineConfig({
             S.documentTypeListItem('post').title('Blog posts'),
             S.documentTypeListItem('category').title('Categories'),
             S.documentTypeListItem('currentProject').title('Current projects'),
+            S.documentTypeListItem('offPlanProject').title('Off-plan projects'),
           ]),
     }),
     visionTool(),
