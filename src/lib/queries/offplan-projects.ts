@@ -10,6 +10,7 @@ import type {
   GalleryImage,
   RelatedDevelopment,
 } from "@/lib/queries/developments";
+import type { FeaturedDevelopment } from "@/lib/queries/home";
 
 // Off-plan projects the team adds in Sanity. They are shaped like rows of the developments table,
 // so the Buy list and the /buy/[slug] page render them the same way.
@@ -85,6 +86,33 @@ export async function getOffPlanProjects(): Promise<OffPlanCard[]> {
     [],
   );
   return rows.map(toCard);
+}
+
+/**
+ * Off-plan projects the team marks "Featured" in Sanity, shaped like rows of the developments
+ * table so the home page can show them in its "Featured Off-Plan Projects" section alongside the
+ * SQL developments. This is what makes featuring a new Sanity project reach the home page
+ * automatically — no code change per project.
+ */
+export async function getFeaturedOffPlanProjects(): Promise<FeaturedDevelopment[]> {
+  const rows = await sanityQuery<SanityOffPlanProject[]>(
+    `*[${ACTIVE} && isFeatured == true] | order(_createdAt desc) {${CARD_FIELDS}}`,
+    {},
+    [],
+  );
+  return rows.map((p) => ({
+    id: 0,
+    title: p.title,
+    slug: p.slug,
+    main_image: sanityImage(p.image, 760, 560),
+    status: p.status,
+    price_from: p.priceFrom ?? null,
+    price_currency: p.priceCurrency,
+    developer_name: p.developer,
+    handover_date: p.handoverDate,
+    bedroom_range: p.bedroomRange,
+    community_name: p.community,
+  }));
 }
 
 const contains = (haystack: string | null, needle: string) =>

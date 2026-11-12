@@ -8,6 +8,7 @@ import {
   getPriorityCommunityRecords,
   PRIORITY_COMMUNITIES,
 } from "@/lib/queries/home";
+import { getFeaturedOffPlanProjects } from "@/lib/queries/offplan-projects";
 import { sanityImage } from "@/lib/sanity";
 import { pageMetadata } from "@/lib/seo";
 import { setting } from "@/lib/settings";
@@ -52,11 +53,18 @@ const why: React.CSSProperties = {
 };
 
 export default async function HomePage() {
-  const [featuredDevelopments, priorityCommunityRecords, currentProjects] = await Promise.all([
-    getFeaturedDevelopments(),
-    getPriorityCommunityRecords(),
-    getCurrentProjects(),
-  ]);
+  const [featuredDevelopments, featuredOffPlanProjects, priorityCommunityRecords, currentProjects] =
+    await Promise.all([
+      getFeaturedDevelopments(),
+      getFeaturedOffPlanProjects(),
+      getPriorityCommunityRecords(),
+      getCurrentProjects(),
+    ]);
+
+  // The "Featured Off-Plan Projects" section shows projects marked Featured in Sanity first
+  // (so a newly featured project like Palm Springs reaches the top automatically), then the
+  // featured rows from the developments table, capped at 8 as before.
+  const featuredProjects = [...featuredOffPlanProjects, ...featuredDevelopments].slice(0, 8);
 
   // Fewer projects get bigger cards, so the row is always full (see .qp-current-* in home.css).
   const homeProjects = currentProjects.slice(0, HOME_CURRENT_PROJECTS);
@@ -168,12 +176,12 @@ export default async function HomePage() {
             <p className="qp-listings-sub">Hand-selected launches and landmark developments across Dubai.</p>
 
             <div className="qp-listings-grid">
-              {featuredDevelopments.length > 0 ? (
-                featuredDevelopments.map((development) => (
+              {featuredProjects.length > 0 ? (
+                featuredProjects.map((development, i) => (
                   <Link
                     href={`/buy/${encodeURIComponent(development.slug ?? "")}`}
                     className="qp-listing-card"
-                    key={development.id}
+                    key={`${development.slug ?? development.id}-${i}`}
                   >
                     <div className="qp-listing-img">
                       {development.status && (
