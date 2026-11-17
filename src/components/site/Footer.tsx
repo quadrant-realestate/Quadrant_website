@@ -1,6 +1,6 @@
 import { FloatingContact } from "@/components/site/FloatingContact";
 import Link from "@/components/site/Link";
-import { pick, type Settings } from "@/lib/settings";
+import { pick, OFFICE_LANDLINE, type Settings } from "@/lib/settings";
 
 export const GOOGLE_REVIEW_URL = "https://g.page/r/CbmTkqwRHGJPEAE/review";
 
@@ -119,12 +119,15 @@ export function Footer({ settings }: { settings: Settings }) {
                     >
                       <i className="fa-solid fa-location-dot" style={icon} /> {address}
                     </a>
+                    <a href={`tel:${OFFICE_LANDLINE.replace(/\s/g, "")}`} style={{ ...link, display: "block", marginTop: 4, paddingLeft: 22 }}>
+                      {OFFICE_LANDLINE}
+                    </a>
                   </li>
                 )}
 
                 {phone && (
                   <li style={item}>
-                    <a href={`tel:${phone}`} style={link}>
+                    <a href={`tel:${phone.replace(/\s/g, "")}`} style={link}>
                       <i className="fa-solid fa-phone" style={icon} /> {phone}
                     </a>
                   </li>
@@ -195,8 +198,8 @@ export function Footer({ settings }: { settings: Settings }) {
       </footer>
 
       <FloatingContact
-        whatsapp={digits(s("whatsapp_number", "971509195194"))}
-        phone={phone ?? "+971 52 768 2266"}
+        whatsapp={digits(s("whatsapp_number", "971521413010"))}
+        phone={phone ?? "04 572 6027"}
       />
     </>
   );

@@ -1,7 +1,7 @@
 import { GOOGLE_REVIEW_URL } from "@/components/site/Footer";
 import Link from "@/components/site/Link";
 import { pageMetadata } from "@/lib/seo";
-import { getSettings, pick } from "@/lib/settings";
+import { getSettings, pick, OFFICE_LANDLINE } from "@/lib/settings";
 import { formTimestamp } from "@/lib/spam";
 import { ContactForm } from "./_components/ContactForm";
 import "./page.css";
@@ -76,7 +76,7 @@ export default async function ContactPage() {
           <div className="qp-contact-left">
             <h3>Direct Contact</h3>
 
-            {/* Office Address */}
+            {/* Office Address + landline */}
             <div className="qp-cont-item">
               <span className="qp-cont-label">Office</span>
               {officeAddress ? (
@@ -84,13 +84,16 @@ export default async function ContactPage() {
               ) : (
                 <p style={{ color: "#8a93a3" }}>Office 805, Concord Tower, Dubai Media City, Dubai</p>
               )}
+              <a href={`tel:${OFFICE_LANDLINE.replace(/\s/g, "")}`} style={{ display: "block", marginTop: 4 }}>
+                {OFFICE_LANDLINE}
+              </a>
             </div>
 
             {/* Phone */}
             <div className="qp-cont-item">
               <span className="qp-cont-label">Phone</span>
               {contactPhone ? (
-                <a href={`tel:${contactPhone}`}>{contactPhone}</a>
+                <a href={`tel:${contactPhone.replace(/\s/g, "")}`}>{contactPhone}</a>
               ) : (
                 <a href="tel:+971527682266">+971 52 768 2266</a>
               )}
@@ -114,8 +117,8 @@ export default async function ContactPage() {
                   {whatsapp}
                 </a>
               ) : (
-                <a href="https://wa.me/971509195194" target="_blank">
-                  +971 50 919 5194
+                <a href="https://wa.me/971521413010" target="_blank">
+                  +971 52 141 3010
                 </a>
               )}
             </div>
